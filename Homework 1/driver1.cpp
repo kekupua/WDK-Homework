@@ -37,7 +37,7 @@ int main(){
   // Assign Temperatures
   for(int i = 0; i < n; ++i){
     for(int j = 0; j < n; ++j){
-      if(i == 1 && j == 1) grid[i*n+j] = tin;     // First Inner
+      if(i*n+j == 1*n+1) grid[i*n+j] = tin;     // First Inner
       if(i == 0) grid[i*n+j] = t1;                // Top side
       else if(j == n-1) grid[i*n+j] = t2;         // Right side
       else if(i == n-1) grid[i*n+j] = t3;         // Bottom side
@@ -46,9 +46,14 @@ int main(){
   }
 
   // Calculate
-  it = avgGrid(grid, n);
+  // it = avgGrid(grid, n);
 
   cout << it << " iterations" << endl;
+  for(int i = 0; i < n*n; ++i){
+
+    if(i%n == 0 && i != 0) cout << endl;
+    cout << grid[i] << " ";
+  }
 
   return 0;
 }
