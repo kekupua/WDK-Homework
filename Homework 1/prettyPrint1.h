@@ -1,1 +1,1 @@
-void prettyPrint(int array[], int size, int iterator);
+void printMatrix(int array[], int size, int iterator);

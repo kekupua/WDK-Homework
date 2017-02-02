@@ -46,10 +46,8 @@ int main(){
     }
   }
 
-  // Calculate
+  // Calculate and Print
   it = avgGrid(grid, n);
 
-  // Print
-  prettyPrint(grid,n,it);
   return 0;
 }
