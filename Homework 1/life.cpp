@@ -6,14 +6,13 @@
 #define SPACESHIP 2
 #define EXPLODER 3
 #define PERSON 4
-#define SMALLEXPLODER 5
+#define FISH 5
 #define ORG 1
 #define DEAD 0
 #define ISOLATION 2
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
-
 using namespace std;
 
 void firstOrg(int (&grid)[10][10], int org){
@@ -54,18 +53,24 @@ void firstOrg(int (&grid)[10][10], int org){
         grid[5][4] = ORG;
         grid[6][3] = ORG;
         grid[6][5] = ORG;
+        grid[7][3] = ORG;
+        grid[7][5] = ORG;
     }
-    else if(org == SMALLEXPLODER){
+    else if(org == FISH){
         grid[2][4] = ORG;
-        grid[3][3] = ORG;
-        grid[3][4] = ORG;
         grid[3][5] = ORG;
-        grid[4][3] = ORG;
-        grid[4][5] = ORG;
-        grid[5][4] = ORG;
+        grid[4][4] = ORG;
+        grid[3][3] = ORG;
+        grid[2][2] = ORG;
+        grid[3][2] = ORG;
+        grid[4][2] = ORG;
     }
 }
 
+/*
+  Spawns new organisms
+  @Parameters: grid_ls, grid
+*/
 int rule1(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;
@@ -97,7 +102,10 @@ int rule1(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     else return NO_CHANGE;
 }
 
-
+/*
+  Kills Isolated organisms
+  @Parameters: grid_ls, grid
+*/
 int rule2(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;
@@ -128,6 +136,10 @@ int rule2(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     else return NO_CHANGE;
 }
 
+/*
+  Kills crowded organisms
+  @Parameters: grid_ls, grid
+*/
 int rule3(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;

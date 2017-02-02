@@ -6,7 +6,7 @@
 #define SPACESHIP 2
 #define EXPLODER 3
 #define PERSON 4
-#define SMALLEXPLODER 5
+#define FISH 5
 #define ORG 1
 #define DEAD 0
 #define ISOLATION 2
@@ -29,7 +29,7 @@ int main(){
     cout << "Enter (2) for spaceship" << endl;
     cout << "Enter (3) for exploder" << endl;
     cout << "Enter (4) for person" << endl;
-    cout << "Enter (5) for small exploder" << endl;
+    cout << "Enter (5) for fish" << endl;
     cin >> i_org;
 
     //initialize game of life matrix

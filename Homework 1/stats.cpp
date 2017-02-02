@@ -6,7 +6,7 @@ int avgGrid(int array[], int size){
   int iterator = 0, change = 2, curr = 0, prev = 0;
 
   // Until steady state is reached
-  while(change > 1 || change < -1){
+  while(change >= 1 || change <= -1){
     prev = curr;
     curr = 0;
 
