@@ -50,7 +50,7 @@ int main(){
 
     for(int i = 0; i < 3; i++){
         //an org is born in empty cells with exactly 3 neighbors
-        status = rule1(p_grid);
+        status = rule1(p_grid, p_grid);
 
         if(status == CHANGE){
             //print out new grid
@@ -58,7 +58,7 @@ int main(){
             cout << endl;
         }
         //an org dies if it has less than 2 neighbors
-        status = rule2(p_grid);
+        status = rule2(p_grid, p_grid);
 
         if(status == CHANGE){
             //print out new grid
@@ -67,7 +67,7 @@ int main(){
         }
 
         //an org dies if it has more than 3 neighbors
-        status = rule3(p_grid);
+        status = rule3(p_grid, p_grid);
 
         if(status == CHANGE){
             //print out new grid

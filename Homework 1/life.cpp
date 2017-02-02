@@ -66,7 +66,7 @@ void firstOrg(int (&grid)[10][10], int org){
     }
 }
 
-int rule1(int (&grid)[10][10]){
+int rule1(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;
 
@@ -74,14 +74,14 @@ int rule1(int (&grid)[10][10]){
         for (int j = 0; j < 10; ++j){
 
             //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
+            if(grid_ls[i-1][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j] == ORG) neighbors++;
+            if(grid_ls[i][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j-1] == ORG) neighbors++;
+            if(grid_ls[i+1][j] == ORG) neighbors++;
+            if(grid_ls[i][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j+1] == ORG) neighbors++;
 
             //implement rules of life
             //new org spawned
@@ -98,7 +98,7 @@ int rule1(int (&grid)[10][10]){
 }
 
 
-int rule2(int (&grid)[10][10]){
+int rule2(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;
 
@@ -106,14 +106,14 @@ int rule2(int (&grid)[10][10]){
         for (int j = 0; j < 10; ++j){
 
             //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
+            if(grid_ls[i-1][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j] == ORG) neighbors++;
+            if(grid_ls[i][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j-1] == ORG) neighbors++;
+            if(grid_ls[i+1][j] == ORG) neighbors++;
+            if(grid_ls[i][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j+1] == ORG) neighbors++;
 
             //implement rules of life
             if(neighbors < ISOLATION){
@@ -128,7 +128,7 @@ int rule2(int (&grid)[10][10]){
     else return NO_CHANGE;
 }
 
-int rule3(int (&grid)[10][10]){
+int rule3(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     int neighbors = 0;
     int status = 0;
 
@@ -136,14 +136,14 @@ int rule3(int (&grid)[10][10]){
         for (int j = 0; j < 10; ++j){
 
             //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
+            if(grid_ls[i-1][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j] == ORG) neighbors++;
+            if(grid_ls[i][j-1] == ORG) neighbors++;
+            if(grid_ls[i-1][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j-1] == ORG) neighbors++;
+            if(grid_ls[i+1][j] == ORG) neighbors++;
+            if(grid_ls[i][j+1] == ORG) neighbors++;
+            if(grid_ls[i+1][j+1] == ORG) neighbors++;
 
             //implement rules of life
             if(neighbors > JUST_RIGHT){
