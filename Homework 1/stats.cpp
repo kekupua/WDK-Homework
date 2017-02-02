@@ -1,20 +1,22 @@
 #include <iostream>
+#include "prettyPrint1.h"
 using namespace std;
 
 int avgGrid(int array[], int size){
-  int iterator = 0, change = 2, old;
+  int iterator = 0, change = 2, curr = 0, prev = 0;
   while(change > 1 || change < -1){
-    old = array[1*size+1];
+    prev = curr;
+    curr = 0;
     for(int i = 1; i < size-1; ++i){
-      for(int j = 1; j < size; ++ j){
-        //old = array[i*size+j];
+      for(int j = 1; j < size-1; ++j){
         array[i*size+j] = (array[i*size+j-1]+array[i*size+j+1]+array[(i+1)*size+j]+array[(i-1)*size+j])/4;
-        //change = array[i*size+j] - old;
+        curr += array[i*size+j];
       }
     }
     iterator += 1;
-    change = array[1*size+1] - old;
-    cout << change << endl;
+    change = curr - prev;
+    if(change < 1 && change > -1) break;
+    prettyPrint(array, size, iterator);
   }
   return iterator;
 }

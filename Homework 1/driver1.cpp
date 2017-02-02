@@ -1,5 +1,6 @@
 #include <iostream>
 #include "stats.h"
+#include "prettyPrint1.h"
 using namespace std;
 
 int main(){
@@ -7,7 +8,7 @@ int main(){
 
   // Get size of square
   while(!valid){
-    cout << "Please enter a square size (integer > 4): " << endl;
+    cout << "Please enter a square size (integer >= 4): " << endl;
     try{
       cin >> n;
       if(n < 4) throw 1;
@@ -23,9 +24,9 @@ int main(){
   cout << "Please enter 4 edge temperatures: " << endl;
   cin >> t1 >> t2 >> t3 >> t4;
 
+  // Get temp of first inner square
   cout << "Please enter an inner temperature: " << endl;
   cin >> tin;
-  int r = n;
 
   // Empty Array
   for(int i = 0; i < n; ++i){
@@ -48,11 +49,7 @@ int main(){
   // Calculate
   it = avgGrid(grid, n);
 
-  cout << it << " iterations" << endl;
-  for(int i = 0; i < n*n; ++i){
-    if(i%n == 0 && i != 0) cout << endl;
-    cout << grid[i] << " ";
-  }
-
+  // Print
+  prettyPrint(grid,n,it);
   return 0;
 }
