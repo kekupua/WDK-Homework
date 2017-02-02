@@ -1,5 +1,5 @@
 #include <iostream>
-#include "prettyPrint1.h"
+#include "prettyPrint.h"
 using namespace std;
 
 int avgGrid(int array[], int size){

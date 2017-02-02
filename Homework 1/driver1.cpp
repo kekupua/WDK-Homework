@@ -1,6 +1,6 @@
 #include <iostream>
 #include "stats.h"
-#include "prettyPrint1.h"
+#include "prettyPrint.h"
 using namespace std;
 
 int main(){

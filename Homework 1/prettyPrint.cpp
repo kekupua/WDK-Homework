@@ -14,7 +14,7 @@ void printMatrix(int array[], int size, int iterator){
 
 }
 
-void printgrid(int grid[10][10]){
+void printGrid(int grid[10][10]){
 
     for (int i = 0; i < 10; ++i){
         for (int j = 0; j < 10; ++j){
