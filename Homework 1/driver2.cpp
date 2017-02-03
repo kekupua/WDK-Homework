@@ -1,20 +1,6 @@
 #include <iostream>
 #include "life.h"
 #include "prettyPrint.h"
-
-#define GLIDER 1
-#define SPACESHIP 2
-#define EXPLODER 3
-#define PERSON 4
-#define FISH 5
-#define ORG 1
-#define DEAD 0
-#define ISOLATION 2
-#define JUST_RIGHT 3
-#define CHANGE 5
-#define NO_CHANGE 6
-#define DIM 30
-
 using namespace std;
 
 int main(){
@@ -47,7 +33,7 @@ int main(){
     cout << endl;
 
     // Printing of the Grid
-    for(int i = 0; i < 40; i++){
+    for(int i = 0; i < ITERATIONS; i++){
         bigRule(life);
         cout << endl;
         printOrganisms(life);

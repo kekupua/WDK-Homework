@@ -17,6 +17,7 @@ void printMatrix(int array[], int size, int iterator){
 
 void printOrganisms(int grid[][DIM]){
 
+    // Iterate through array
     for (int i = 0; i < DIM; ++i){
         for (int j = 0; j < DIM; ++j){
             cout << grid[i][j] << ' ';
