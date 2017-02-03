@@ -1,4 +1,5 @@
 #include <iostream>
+#define DIM 15
 using namespace std;
 
 void printMatrix(int array[], int size, int iterator){
@@ -14,10 +15,10 @@ void printMatrix(int array[], int size, int iterator){
 
 }
 
-void printGrid(int grid[10][10]){
+void printOrganisms(int grid[][DIM]){
 
-    for (int i = 0; i < 10; ++i){
-        for (int j = 0; j < 10; ++j){
+    for (int i = 0; i < DIM; ++i){
+        for (int j = 0; j < DIM; ++j){
             cout << grid[i][j] << ' ';
         }
         cout << endl;

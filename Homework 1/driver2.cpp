@@ -13,15 +13,12 @@
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
-#define DIM 20 
+#define DIM 15
 
 using namespace std;
 
 int main(){
-    int life_grid[DIM][DIM];
-    int **grid_cpy;
-    int (&p_grid)[DIM][DIM] = life_grid;
-    int x, y;
+    int life[DIM][DIM];
     int i_org = 0;
     int status = 0;
 
@@ -37,49 +34,50 @@ int main(){
     //initialize game of life matrix
     for(int i = 0; i < DIM; i++){
         for(int j = 0; j < DIM; j++){
-            life_grid[i][j] = DEAD;
-            life_grid[i][j] = DEAD;
+            life[i][j] = DEAD;
+            life[i][j] = DEAD;
         }
     }
 
     //intialize organism
-    firstOrg(life_grid, i_org);
+    firstOrg(life, i_org);
 
-    //print out grid with initial orgs
-    printGrid(life_grid);
+    //print out life with initial orgs
+    printOrganisms(life);
     cout << endl;
 
 
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 5; i++){
         //grid_cpy cause seg fault
         //aggggh!
-        //grid_cpy = arraycopy(life_grid);
+        //grid_cpy = arraycopy(grid);
 
         //an org is born in empty cells with exactly 3 neighbors
-        status = rule1(p_grid, p_grid);
+        status = rule1(life);
 
         if(status == CHANGE){
             //print out new grid
-            printGrid(life_grid);
+            //printOrganisms(life);
             cout << endl;
         }
         //an org dies if it has less than 2 neighbors
-        status = rule2(p_grid, p_grid);
+        status = rule2(life);
 
         if(status == CHANGE){
             //print out new grid
-            printGrid(life_grid);
+            //printOrganisms(life);
             cout << endl;
         }
 
         //an org dies if it has more than 3 neighbors
-        status = rule3(p_grid, p_grid);
+        status = rule3(life);
 
         if(status == CHANGE){
             //print out new grid
-            printGrid(life_grid);
+            //printOrganisms(life);
             cout << endl;
         }
+        printOrganisms(life);
     }
 
 }
