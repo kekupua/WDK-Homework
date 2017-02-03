@@ -13,12 +13,14 @@
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
+#define DIM 20 
 
 using namespace std;
 
 int main(){
-    int life_grid[10][10];
-    int (&p_grid)[10][10] = life_grid;
+    int life_grid[DIM][DIM];
+    int **grid_cpy;
+    int (&p_grid)[DIM][DIM] = life_grid;
     int x, y;
     int i_org = 0;
     int status = 0;
@@ -33,8 +35,8 @@ int main(){
     cin >> i_org;
 
     //initialize game of life matrix
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < DIM; i++){
+        for(int j = 0; j < DIM; j++){
             life_grid[i][j] = DEAD;
             life_grid[i][j] = DEAD;
         }
@@ -49,6 +51,10 @@ int main(){
 
 
     for(int i = 0; i < 3; i++){
+        //grid_cpy cause seg fault
+        //aggggh!
+        //grid_cpy = arraycopy(life_grid);
+
         //an org is born in empty cells with exactly 3 neighbors
         status = rule1(p_grid, p_grid);
 

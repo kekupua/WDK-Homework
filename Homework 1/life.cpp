@@ -13,9 +13,10 @@
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
+#define DIM 20 
 using namespace std;
 
-void firstOrg(int (&grid)[10][10], int org){
+void firstOrg(int (&grid)[DIM][DIM], int org){
     if(org == GLIDER){
         grid[5][5] = ORG;
         grid[5][4] = ORG;
@@ -71,12 +72,12 @@ void firstOrg(int (&grid)[10][10], int org){
   Spawns new organisms
   @Parameters: grid_ls, grid
 */
-int rule1(const int (&grid_ls)[10][10], int (&grid)[10][10]){
+int rule1(const int (&grid_ls)[DIM][DIM], int (&grid)[DIM][DIM]){
     int neighbors = 0;
     int status = 0;
 
-    for (int i = 0; i < 10; ++i){
-        for (int j = 0; j < 10; ++j){
+    for (int i = 0; i < DIM; ++i){
+        for (int j = 0; j < DIM; ++j){
 
             //find neighbors
             if(grid_ls[i-1][j-1] == ORG) neighbors++;
@@ -106,12 +107,12 @@ int rule1(const int (&grid_ls)[10][10], int (&grid)[10][10]){
   Kills Isolated organisms
   @Parameters: grid_ls, grid
 */
-int rule2(const int (&grid_ls)[10][10], int (&grid)[10][10]){
+int rule2(const int (&grid_ls)[DIM][DIM], int (&grid)[DIM][DIM]){
     int neighbors = 0;
     int status = 0;
 
-    for (int i = 0; i < 10; ++i){
-        for (int j = 0; j < 10; ++j){
+    for (int i = 0; i < DIM; ++i){
+        for (int j = 0; j < DIM; ++j){
 
             //find neighbors
             if(grid_ls[i-1][j-1] == ORG) neighbors++;
@@ -140,12 +141,12 @@ int rule2(const int (&grid_ls)[10][10], int (&grid)[10][10]){
   Kills crowded organisms
   @Parameters: grid_ls, grid
 */
-int rule3(const int (&grid_ls)[10][10], int (&grid)[10][10]){
+int rule3(const int (&grid_ls)[DIM][DIM], int (&grid)[DIM][DIM]){
     int neighbors = 0;
     int status = 0;
 
-    for (int i = 0; i < 10; ++i){
-        for (int j = 0; j < 10; ++j){
+    for (int i = 0; i < DIM; ++i){
+        for (int j = 0; j < DIM; ++j){
 
             //find neighbors
             if(grid_ls[i-1][j-1] == ORG) neighbors++;
@@ -168,4 +169,17 @@ int rule3(const int (&grid_ls)[10][10], int (&grid)[10][10]){
     }
     if(status != 0) return CHANGE;
     else return NO_CHANGE;
+}
+
+int** arraycopy(int grid[DIM][DIM]){
+    int** copy = 0;
+    copy = new int*[DIM];
+    
+    for(int i = 0; i < DIM; i++){
+        copy = new int*[DIM];
+        for(int j = 0; j < DIM; j++){
+            copy[i][j] = grid[i][j];
+        }
+    }
+    return copy;
 }
