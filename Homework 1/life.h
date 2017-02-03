@@ -1,6 +1,5 @@
-#define DIM 15
+#define DIM 30
 void firstOrg(int grid[][DIM], int org);
-int rule1(int grid[][DIM]);
-int rule2(int grid[][DIM]);
-int rule3(int grid[][DIM]);
+void bigRule(int grid[][DIM]);
+bool isEmpty(int grid[][DIM]);
 int** arraycopy(int grid[DIM][DIM]);

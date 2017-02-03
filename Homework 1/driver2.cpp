@@ -13,7 +13,7 @@
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
-#define DIM 15
+#define DIM 30
 
 using namespace std;
 
@@ -22,7 +22,7 @@ int main(){
     int i_org = 0;
     int status = 0;
 
-    //ask for starting organism
+    // Ask for starting organism
     cout << "Which organism would you like to start with?" << endl;
     cout << "Enter (1) for glider" << endl;
     cout << "Enter (2) for spaceship" << endl;
@@ -31,7 +31,7 @@ int main(){
     cout << "Enter (5) for fish" << endl;
     cin >> i_org;
 
-    //initialize game of life matrix
+    // Initialize game of life matrix
     for(int i = 0; i < DIM; i++){
         for(int j = 0; j < DIM; j++){
             life[i][j] = DEAD;
@@ -39,45 +39,20 @@ int main(){
         }
     }
 
-    //intialize organism
+    // Intialize organism
     firstOrg(life, i_org);
 
-    //print out life with initial orgs
+    // Print out life with initial orgs
     printOrganisms(life);
     cout << endl;
 
-
-    for(int i = 0; i < 5; i++){
-        //grid_cpy cause seg fault
-        //aggggh!
-        //grid_cpy = arraycopy(grid);
-
-        //an org is born in empty cells with exactly 3 neighbors
-        status = rule1(life);
-
-        if(status == CHANGE){
-            //print out new grid
-            //printOrganisms(life);
-            cout << endl;
-        }
-        //an org dies if it has less than 2 neighbors
-        status = rule2(life);
-
-        if(status == CHANGE){
-            //print out new grid
-            //printOrganisms(life);
-            cout << endl;
-        }
-
-        //an org dies if it has more than 3 neighbors
-        status = rule3(life);
-
-        if(status == CHANGE){
-            //print out new grid
-            //printOrganisms(life);
-            cout << endl;
-        }
+    // Printing of the Grid
+    for(int i = 0; i < 40; i++){
+        bigRule(life);
+        cout << endl;
         printOrganisms(life);
+        if(isEmpty(life)) break;
     }
 
+    return 0;
 }

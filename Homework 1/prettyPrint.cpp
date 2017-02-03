@@ -1,5 +1,5 @@
 #include <iostream>
-#define DIM 15
+#define DIM 30
 using namespace std;
 
 void printMatrix(int array[], int size, int iterator){

@@ -1,4 +1,4 @@
-#define DIM 15
+#define DIM 30
 // Print the matrix
 void printMatrix(int array[], int size, int iterator);
 

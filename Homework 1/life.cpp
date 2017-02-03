@@ -13,7 +13,7 @@
 #define JUST_RIGHT 3
 #define CHANGE 5
 #define NO_CHANGE 6
-#define DIM 15
+#define DIM 30
 using namespace std;
 
 void firstOrg(int grid[][DIM], int org){
@@ -36,14 +36,13 @@ void firstOrg(int grid[][DIM], int org){
         grid[6][1] = ORG;
     }
     else if(org == EXPLODER){
-        grid[2][4] = ORG;
-        grid[3][4] = ORG;
-        grid[4][4] = ORG;
-        grid[4][5] = ORG;
-        grid[4][3] = ORG;
-        grid[5][3] = ORG;
-        grid[5][5] = ORG;
-        grid[6][4] = ORG;
+        grid[10][10] = ORG;
+        grid[11][10] = ORG;
+        grid[11][11] = ORG;
+        grid[11][9] = ORG;
+        grid[12][9] = ORG;
+        grid[12][11] = ORG;
+        grid[13][10] = ORG;
     }
     else if(org == PERSON){
         grid[2][4] = ORG;
@@ -68,149 +67,104 @@ void firstOrg(int grid[][DIM], int org){
     }
 }
 
-/*
-  Spawns new organisms
-  @Parameters: grid
-*/
-int rule1(int grid[][DIM]){
-    int tempGrid[DIM][DIM];
-    int neighbors = 0;
-    int status = 0;
+void bigRule(int grid[][DIM]){
+  int tempGrid[DIM][DIM];
+  int neighbors = 0;
+  int status = 0;
 
-    // Move original into copy
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          tempGrid[i][j] = grid[i][j];
-        }
-    }
+  // Move original into copy
+  for (int i = 0; i < DIM; ++i){
+      for (int j = 0; j < DIM; ++j){
+        tempGrid[i][j] = grid[i][j];
+      }
+  }
 
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-            //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
+  // Rule 1
+  for (int i = 0; i < DIM; ++i){
+      for (int j = 0; j < DIM; ++j){
+          //find neighbors
+          if(grid[i-1][j-1] == ORG) neighbors++;
+          if(grid[i-1][j] == ORG) neighbors++;
+          if(grid[i][j-1] == ORG) neighbors++;
+          if(grid[i-1][j+1] == ORG) neighbors++;
+          if(grid[i+1][j-1] == ORG) neighbors++;
+          if(grid[i+1][j] == ORG) neighbors++;
+          if(grid[i][j+1] == ORG) neighbors++;
+          if(grid[i+1][j+1] == ORG) neighbors++;
 
-            //implement rules of life
-            //new org spawned
-            if(neighbors == JUST_RIGHT){
-                tempGrid[i][j] = ORG;
-                status++;
-            }
-            //reset neighbors
-            neighbors = 0;
-        }
-    }
+          //implement rules of life
+          //new org spawned
+          if(neighbors == JUST_RIGHT){
+              tempGrid[i][j] = ORG;
+              status++;
+          }
+          //reset neighbors
+          neighbors = 0;
+      }
+  }
 
-    // Move copied grid into original
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          if(tempGrid[i][j] == ORG)
-            grid[i][j] = tempGrid[i][j];
-        }
-    }
+  // Rule 2
+  for (int i = 0; i < DIM; ++i){
+      for (int j = 0; j < DIM; ++j){
+          int neighbors = 0;
+          //find neighbors
+          if(grid[i-1][j-1] == ORG) neighbors++;
+          if(grid[i-1][j] == ORG) neighbors++;
+          if(grid[i][j-1] == ORG) neighbors++;
+          if(grid[i-1][j+1] == ORG) neighbors++;
+          if(grid[i+1][j-1] == ORG) neighbors++;
+          if(grid[i+1][j] == ORG) neighbors++;
+          if(grid[i][j+1] == ORG) neighbors++;
+          if(grid[i+1][j+1] == ORG) neighbors++;
 
-    if(status != 0) return CHANGE;
-    else return NO_CHANGE;
+          //implement rules of life
+          if(neighbors < ISOLATION){
+              tempGrid[i][j] = DEAD;
+              status++;
+          }
+      }
+  }
+
+  // Rule 3
+  for (int i = 0; i < DIM; ++i){
+      for (int j = 0; j < DIM; ++j){
+          int neighbors = 0;
+
+          //find neighbors
+          if(grid[i-1][j-1] == ORG) neighbors++;
+          if(grid[i-1][j] == ORG) neighbors++;
+          if(grid[i][j-1] == ORG) neighbors++;
+          if(grid[i-1][j+1] == ORG) neighbors++;
+          if(grid[i+1][j-1] == ORG) neighbors++;
+          if(grid[i+1][j] == ORG) neighbors++;
+          if(grid[i][j+1] == ORG) neighbors++;
+          if(grid[i+1][j+1] == ORG) neighbors++;
+
+          //implement rules of life
+          if(neighbors > JUST_RIGHT){
+              tempGrid[i][j] = DEAD;
+              status++;
+          }
+      }
+  }
+  // Move copied grid into original
+  for (int i = 0; i < DIM; ++i){
+      for (int j = 0; j < DIM; ++j){
+        if(tempGrid[i][j] != grid[i][j])
+          grid[i][j] = tempGrid[i][j];
+      }
+  }
 }
 
-/*
-  Kills Isolated organisms
-  @Parameters: grid
-*/
-int rule2(int grid[][DIM]){
-    int tempGrid[DIM][DIM];
-    int status = 0;
-
-    // Move original into copy
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          tempGrid[i][j] = grid[i][j];
-        }
+bool isEmpty(int grid[][DIM]){
+  int count = 0;
+  for(int j = 0; j < DIM; ++j){
+    for(int k = 0; k < DIM; ++k){
+      count += grid[j][k];
     }
-
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-            int neighbors = 0;
-            //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
-
-            //implement rules of life
-            if(neighbors < ISOLATION){
-                tempGrid[i][j] = DEAD;
-                status++;
-            }
-        }
-    }
-    // Move copied grid into original
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          if(tempGrid[i][j] == DEAD)
-            grid[i][j] = tempGrid[i][j];
-        }
-    }
-
-    if(status != 0) return CHANGE;
-    else return NO_CHANGE;
-}
-
-/*
-  Kills crowded organisms
-  @Parameters: grid
-*/
-int rule3(int grid[][DIM]){
-    int tempGrid[DIM][DIM];
-    int status = 0;
-
-    // Move copied grid into original
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          tempGrid[i][j] = grid[i][j];
-        }
-    }
-
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-            int neighbors = 0;
-
-            //find neighbors
-            if(grid[i-1][j-1] == ORG) neighbors++;
-            if(grid[i-1][j] == ORG) neighbors++;
-            if(grid[i][j-1] == ORG) neighbors++;
-            if(grid[i-1][j+1] == ORG) neighbors++;
-            if(grid[i+1][j-1] == ORG) neighbors++;
-            if(grid[i+1][j] == ORG) neighbors++;
-            if(grid[i][j+1] == ORG) neighbors++;
-            if(grid[i+1][j+1] == ORG) neighbors++;
-
-            //implement rules of life
-            if(neighbors > JUST_RIGHT){
-                tempGrid[i][j] = DEAD;
-                status++;
-            }
-        }
-    }
-    // Move copied grid into original
-    for (int i = 0; i < DIM; ++i){
-        for (int j = 0; j < DIM; ++j){
-          if(tempGrid[i][j] == DEAD)
-            grid[i][j] = tempGrid[i][j];
-        }
-    }
-    if(status != 0) return CHANGE;
-    else return NO_CHANGE;
+  }
+  if(count) return false;
+  else return true;
 }
 
 int** arraycopy(int grid[DIM][DIM]){
