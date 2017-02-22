@@ -15,7 +15,8 @@ public:
 	void insert(DLink* n, DLink* p); // Insert element n before p
 	void add(DLink* p, DLink* n); // Insert element n after p
 	void erase(DLink* p); // delete element p
-	DLink* find(const int& s); // find value s in list, return node pointer
+	DLink* findAcctNum(const long int& s); // find value s in list, return node pointer
+	DLink* findName(const string& s); //find string s in list, return node pointer
 	DLink* advance(int n); // advance to nth element, return node pointer
 	void append(DLink *p); // append node to end of list
 	void print_all(DLink* head); // print all nodes, given head
