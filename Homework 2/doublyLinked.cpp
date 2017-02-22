@@ -3,7 +3,7 @@
 using namespace std;
 
 void DoublyLinkedList::append(DLink *p) {
-	cout << "Append " << p->value << endl; 
+	cout << "Append " << p->b.getName() << endl; 
 	if (head == NULL) {
 		head = p;
 		p->prev = NULL;
@@ -18,7 +18,7 @@ void DoublyLinkedList::append(DLink *p) {
 }
 
 void DoublyLinkedList::insert(DLink* n, DLink *p) {  //insert n before p
-	cout << "Insert " << n->value << "..." << endl;
+	cout << "Inserting " << n->b.getName() << "..." << endl;
  	// IF p doesn't exist
 	if(p == NULL){
 		append(n);
@@ -41,7 +41,7 @@ void DoublyLinkedList::insert(DLink* n, DLink *p) {  //insert n before p
 }
 
 void DoublyLinkedList::add(DLink* p, DLink *n) {  //insert n after p
-	cout << "Add " << n->value << "..." << endl;
+	cout << "Add " << n->b.getName() << "..." << endl;
 	// IF p doesn't exist
 	if(p == NULL){
 		append(n);
@@ -66,7 +66,7 @@ void DoublyLinkedList::add(DLink* p, DLink *n) {  //insert n after p
 
 
 void DoublyLinkedList::erase(DLink *p) {   //delete element p
-	cout << "Deleting " << p->value << "..." << endl;
+	cout << "Deleting " << p->b.getName() << "..." << endl;
 	DLink* curr = getHead();
 	// IF empty list
 	if(curr == NULL) return;
@@ -87,17 +87,30 @@ void DoublyLinkedList::erase(DLink *p) {   //delete element p
 }
 
 // Find node
-DLink* DoublyLinkedList::find(const int& s){
+DLink* DoublyLinkedList::findAcctNum(const long int& s){
   cout << "Find " << s << "..." << endl;
   DLink* curr = this->getHead();
 
   // Traverse to S
-  while(curr->value != s){
+  while(curr->b.getAcctNum() != s){
     //If no other nodes
     if(curr == NULL) return NULL;
     curr = curr->next;
   }
   return curr;
+}
+
+DLink* DoublyLinkedList::findName(const string& s) {
+	cout << "Find " << s << "..." << endl;
+	DLink* curr = this->getHead();
+
+	// Traverse to S
+	while (curr->b.getName() != s) {
+		//If no other nodes
+		if (curr == NULL) return NULL;
+		curr = curr->next;
+	}
+	return curr;
 }
 
 DLink* DoublyLinkedList::advance(int n){
@@ -113,7 +126,7 @@ DLink* DoublyLinkedList::advance(int n){
 
 void DoublyLinkedList::print_all(DLink* head) {
 	while (head) {
-		cout << head->value;
+		cout << head->b.getName() << " $" << head->b.getBalance();
 		if (head = head->next) cout << ", ";
 	}
 	cout << "\n";
