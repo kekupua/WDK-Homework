@@ -12,6 +12,10 @@ basicAccount::basicAccount(basicAccount& copyAccount) {
 	this->balance = copyAccount.balance;
 }
 
+long int basicAccount::getAcctNum(){
+	return this->acctNum;
+}
+
 void basicAccount::setAcctNum(long int id) {
 	this->acctNum = id;
 }
