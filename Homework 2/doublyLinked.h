@@ -16,6 +16,8 @@ public:
 	bool addB(DLink* p); // Add bank link
 	void findB(string name);
 	void findB(long int id);
+	void deleteB(string name);
+	void deleteB(long int id);
 
 	void insert(DLink* n, DLink* p); // Insert element n before p
 	void add(DLink* p, DLink* n); // Insert element n after p

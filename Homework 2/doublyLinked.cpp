@@ -85,7 +85,74 @@ void DoublyLinkedList::findB(long int id){
 			return;
 		}
 
-		//If no other nodes
+		//Waterfall
+		else curr = curr->next;
+	}
+	cout << "Error: Not Found" << endl;
+	return;
+}
+
+void DoublyLinkedList::deleteB(string name){
+	cout << "Delete " << name << "..." << endl;
+  DLink* curr = getHead();
+  // Traverse to S
+  while(curr){
+		if(curr->b.getName() == name){
+			// IF has prev and next
+			if(curr->next && curr->prev){
+				curr->next->prev = curr->prev;
+				curr->prev->next = curr->next;
+			}
+			else if(curr->prev){
+				curr->prev->next = NULL;
+				tail = curr->prev;
+			}
+			else if(curr->next){
+				if(curr == getHead()) setHead(curr->next);
+				curr->next->prev = NULL;
+			}
+			else{
+				head = NULL;
+			}
+			delete curr;
+			cout << "Deleted " << name << endl;
+			return;
+		}
+
+		// Waterfall
+		else curr = curr->next;
+  }
+	cout << "Error: Not Found" << endl;
+	return;
+}
+
+void DoublyLinkedList::deleteB(long int id){
+	cout << "Delete " << id << "..." << endl;
+	DLink* curr = getHead();
+	// Traverse to S
+	while(curr){
+		if(curr->b.getAcctNum() == id){
+			// IF has prev and next
+			if(curr->next && curr->prev){
+				curr->next->prev = curr->prev;
+				curr->prev->next = curr->next;
+			}
+			else if(curr->prev){
+				curr->prev->next = NULL;
+			}
+			else if(curr->next){
+				if(curr == getHead()) setHead(curr->next);
+				curr->next->prev = NULL;
+			}
+			else{
+				head = NULL;
+			}
+			delete curr;
+			cout << "Deleted " << id << endl;
+			return;
+		}
+
+		// Waterfall
 		else curr = curr->next;
 	}
 	cout << "Error: Not Found" << endl;

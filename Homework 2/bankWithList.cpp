@@ -23,7 +23,7 @@ int main(){
     if(action == CREATE){
       string name;
       float balance;
-      cout << "Enter a name and balance" << endl;
+      cout << "Enter a name, balance and ID(in order)" << endl;
       cin >> name >> balance >> ID;
       basicAccount* info = new basicAccount(ID, name, balance);
       DLink* link = new DLink(info);
@@ -37,7 +37,7 @@ int main(){
       cout << "Search by Name or Account Number: " << endl;
       cin >> query;
       if(isdigit(query[0])){
-        long int search = atoi(query.c_str()); 
+        long int search = atoi(query.c_str());
         d.findB(search);
       }
       else d.findB(query);
@@ -45,7 +45,14 @@ int main(){
 
     // Delete Account
     else if(action == DELETE){
-
+      string query;
+      cout << "Delete by Name or Account Number: " << endl;
+      cin >> query;
+      if(isdigit(query[0])){
+        long int search = atoi(query.c_str());
+        d.deleteB(search);
+      }
+      else d.deleteB(query);
     }
 
     else if(action == PRINT){
