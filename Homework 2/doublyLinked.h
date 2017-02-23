@@ -13,7 +13,7 @@ struct DLink {	//doubly linked node
 class DoublyLinkedList {
 public:
 	DoublyLinkedList(){ head = NULL; tail = NULL; }
-	void addB(DLink* p); // Add bank link
+	bool addB(DLink* p); // Add bank link
 	void insert(DLink* n, DLink* p); // Insert element n before p
 	void add(DLink* p, DLink* n); // Insert element n after p
 	void erase(DLink* p); // delete element p

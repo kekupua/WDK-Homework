@@ -10,10 +10,10 @@ using namespace std;
 
 int main(){
   DoublyLinkedList d;
-  long int startingID;
+  long int ID;
   while(1){
     int action;
-    cout << "Action:\n(1) Create Account\n(2) Find Customer\n(3) Delete Customer\n(4) Print All\n";
+    cout << "\nAction:\n(1) Create Account\n(2) Find Customer\n(3) Delete Customer\n(4) Print All\n";
     cin >> action;
 
     // Create account
@@ -21,13 +21,11 @@ int main(){
       string name;
       float balance;
       cout << "Enter a name and balance" << endl;
-      cin >> name >> balance >> startingID;
-      basicAccount* info = new basicAccount(startingID, name, balance);
+      cin >> name >> balance >> ID;
+      basicAccount* info = new basicAccount(ID, name, balance);
       DLink* link = new DLink(info);
-      cout << "Name: " << link->b.getName() << endl;
-      cout << "Balance: " << link->b.getBalance() << endl;
-      d.addB(link);
-      ++startingID;
+      int status = d.addB(link);
+      if(!status){delete link; delete info;}
     }
 
     // Find Account

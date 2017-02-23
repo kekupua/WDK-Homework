@@ -4,16 +4,15 @@
 using namespace std;
 
 // Given DLink, add to the list incrementally.
-void DoublyLinkedList::addB(DLink *p){
+bool DoublyLinkedList::addB(DLink *p){
 	DLink* curr = getHead();
-	if(curr == NULL){append(p); return;}
+	if(curr == NULL){append(p); return 1;}
 	else{
 		while(curr){
 			// If acctNum found in list
 			if(curr->b.getAcctNum() == p->b.getAcctNum()){
-				cout << "Account Number Already in Use." << endl;
-				delete[] p;
-				return;
+				cout << "Error: Account Number Already in Use." << endl;
+				return 0;
 			}
 
 			// IF at the head
@@ -22,7 +21,7 @@ void DoublyLinkedList::addB(DLink *p){
 					curr->prev = p;
 					p->next = curr;
 					setHead(p);
-					return;
+					return 1;
 				}
 			}
 
@@ -35,7 +34,7 @@ void DoublyLinkedList::addB(DLink *p){
 					p->next = curr;
 				}
 				else append(p);
-				return;
+				return 1;
 			}
 
 			// In the list
@@ -44,7 +43,7 @@ void DoublyLinkedList::addB(DLink *p){
 				p->next = curr->next;
 				p->prev = curr;
 				curr->next = p;
-				return;
+				return 1;
 			}
 
 			else
@@ -52,6 +51,8 @@ void DoublyLinkedList::addB(DLink *p){
 		}
 	}
 }
+
+
 
 void DoublyLinkedList::append(DLink *p) {
 	cout << "Append " << p->b.getName() << endl;
