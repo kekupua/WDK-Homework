@@ -9,6 +9,7 @@ public:
 	basicAccount(long int id, string n, float bal) : acctNum(id), name(n), balance(bal) {}
 	basicAccount(basicAccount& copyAccount);
 
+	long int getAcctNum();
 	void setAcctNum(long int id);
 
 	float getBalance();
