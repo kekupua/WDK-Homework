@@ -5,7 +5,7 @@ struct DLink {	//doubly linked node
 	basicAccount b;
 	DLink* prev;
 	DLink* next;
-	DLink(basicAccount* bank){}
+	DLink(basicAccount* bank):b(*bank), prev(NULL), next(NULL){}
 	DLink(basicAccount bank, DLink* p = 0, DLink* n = 0)
 		:b(bank), prev(p), next(n) {}
 };

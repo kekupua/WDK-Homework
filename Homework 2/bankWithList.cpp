@@ -10,7 +10,7 @@ using namespace std;
 
 int main(){
   DoublyLinkedList d;
-  long int startingID = 1;
+  long int startingID;
   while(1){
     int action;
     cout << "Action:\n(1) Create Account\n(2) Find Customer\n(3) Delete Customer\n(4) Print All\n";
@@ -21,11 +21,11 @@ int main(){
       string name;
       float balance;
       cout << "Enter a name and balance" << endl;
-      cin >> name >> balance;
-      cout << "Name: " << name << endl;
-      cout << "Balance: " << balance << endl;
+      cin >> name >> balance >> startingID;
       basicAccount* info = new basicAccount(startingID, name, balance);
       DLink* link = new DLink(info);
+      cout << "Name: " << link->b.getName() << endl;
+      cout << "Balance: " << link->b.getBalance() << endl;
       d.addB(link);
       ++startingID;
     }
@@ -41,12 +41,13 @@ int main(){
     }
 
     else if(action == PRINT){
+      if(d.getHead() == NULL) cout << "Empty List!" << endl;
       d.print_all(d.getHead());
     }
 
     // Invalid input
     else{
-      cout << "Invalid rule, try again." << endl;
+      cout << endl << "Invalid rule, try again." << endl;
     }
 
   }

@@ -9,13 +9,44 @@ void DoublyLinkedList::addB(DLink *p){
 	if(curr == NULL){append(p); return;}
 	else{
 		while(curr){
-			if(curr->b.getAcctNum() < p->b.getAcctNum()){
+			// If acctNum found in list
+			if(curr->b.getAcctNum() == p->b.getAcctNum()){
+				cout << "Account Number Already in Use." << endl;
+				delete[] p;
+				return;
+			}
+
+			// IF at the head
+			if(curr == getHead()){
+				if(curr->b.getAcctNum() > p->b.getAcctNum()){
+					curr->prev = p;
+					p->next = curr;
+					setHead(p);
+					return;
+				}
+			}
+
+			// Reach the end of the list
+			if(curr->next == NULL){
+				if(curr->b.getAcctNum() > p->b.getAcctNum()){
+					curr->prev->next = p;
+					p->prev = curr->prev;
+					curr->prev = p;
+					p->next = curr;
+				}
+				else append(p);
+				return;
+			}
+
+			// In the list
+			if(curr->next->b.getAcctNum() > p->b.getAcctNum() && curr->b.getAcctNum() < p->b.getAcctNum()){
+				curr->next->prev = p;
 				p->next = curr->next;
 				p->prev = curr;
-				curr->next->prev = p;
 				curr->next = p;
 				return;
 			}
+
 			else
 				curr = curr->next;
 		}
@@ -133,7 +164,7 @@ DLink* DoublyLinkedList::advance(int n){
 
 void DoublyLinkedList::print_all(DLink* head) {
 	while (head) {
-		cout << head->b.getAcctNum();
+		cout << head->b.getName() << " (" << head->b.getAcctNum() << ")";
 		if (head = head->next) cout << ", ";
 	}
 	cout << "\n";
