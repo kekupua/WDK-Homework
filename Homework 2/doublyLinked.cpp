@@ -52,7 +52,45 @@ bool DoublyLinkedList::addB(DLink *p){
 	}
 }
 
+void DoublyLinkedList::findB(string name){
+	cout << "Find " << name << "..." << endl;
+  DLink* curr = getHead();
+  // Traverse to S
+  while(curr){
+		if(curr->b.getName() == name){
+			cout << endl << name << endl;
+			cout << "=========" << endl;
+			cout << "Account Number: " << curr->b.getAcctNum() << endl;
+			cout << "Balance: " << curr->b.getBalance() << endl;
+			return;
+		}
 
+		//If no other nodes
+		else curr = curr->next;
+  }
+	cout << "Error: Not Found" << endl;
+	return;
+}
+
+void DoublyLinkedList::findB(long int id){
+	cout << "Find " << id << "..." << endl;
+	DLink* curr = getHead();
+	// Traverse to S
+	while(curr){
+		if(curr->b.getAcctNum() == id){
+			cout << curr->b.getName() << endl;
+			cout << "=========" << endl;
+			cout << "Account Number: " << curr->b.getAcctNum() << endl;
+			cout << "Balance: " << curr->b.getBalance() << endl;
+			return;
+		}
+
+		//If no other nodes
+		else curr = curr->next;
+	}
+	cout << "Error: Not Found" << endl;
+	return;
+}
 
 void DoublyLinkedList::append(DLink *p) {
 	cout << "Append " << p->b.getName() << endl;

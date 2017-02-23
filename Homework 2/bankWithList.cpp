@@ -4,6 +4,9 @@
 #define PRINT 4
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "basicAccount.h"
 #include "doublyLinked.h"
 using namespace std;
@@ -30,7 +33,14 @@ int main(){
 
     // Find Account
     else if(action == FIND){
-
+      string query;
+      cout << "Search by Name or Account Number: " << endl;
+      cin >> query;
+      if(isdigit(query[0])){
+        long int search = atoi(query.c_str()); 
+        d.findB(search);
+      }
+      else d.findB(query);
     }
 
     // Delete Account
