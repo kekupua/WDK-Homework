@@ -38,8 +38,8 @@ void basicAccount::deposit(float value) {
 }
 
 void basicAccount::prettyPrint() {
-	cout << this->getName() << "'s Account" << endl;
-	cout << "Balance: " << this->getBalance() << endl;
+	cout << getName() << "'s Account" << endl;
+	cout << "Balance: " << getBalance() << endl;
 	cout << endl;
 }
 
