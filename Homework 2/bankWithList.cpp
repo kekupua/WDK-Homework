@@ -21,32 +21,56 @@ int main(){
 
     // Create account
     if(action == CREATE){
-      s.addB();
+      string name;
+      float balance;
+      long int ID;
+
+      // User input
+    	cout << "Enter a name: " << endl;
+    	cin >> name;
+      cout << "Enter a balance: " << endl;
+      cin >> balance;
+      cout << "Enter an ID: " << endl;
+      cin >> ID;
+
+    	// Create necessary objects
+    	basicAccount* info = new basicAccount(ID, name, balance);
+    	SLink* link = new SLink(info);
+
+      // Attempt to insert
+      int status = s.addB(link);
+      if(!status){ delete link; delete info;}
+      cout << endl;
+      s.print_all();
     }
 
-    // Find Account
-    // else if(action == FIND){
-    //   string query;
-    //   cout << "Search by Name or Account Number: " << endl;
-    //   cin >> query;
-    //   if(isdigit(query[0])){
-    //     long int search = atoi(query.c_str());
-    //     d.findB(search);
-    //   }
-    //   else d.findB(query);
-    // }
-    //
-    // // Delete Account
-    // else if(action == DELETE){
-    //   string query;
-    //   cout << "Delete by Name or Account Number: " << endl;
-    //   cin >> query;
-    //   if(isdigit(query[0])){
-    //     long int search = atoi(query.c_str());
-    //     d.deleteB(search);
-    //   }
-    //   else d.deleteB(query);
-    // }
+    //Find Account
+    else if(action == FIND){
+      string query;
+      cout << "Search by Name or Account Number: " << endl;
+      cin >> query;
+      if(isdigit(query[0])){
+        long int search = atoi(query.c_str());
+        s.findB(search);
+      }
+      else s.findB(query);
+      cout << endl;
+      s.print_all();
+    }
+
+    // Delete Account
+    else if(action == DELETE){
+      string query;
+      cout << "Delete by Name or Account Number: " << endl;
+      cin >> query;
+      if(isdigit(query[0])){
+        long int search = atoi(query.c_str());
+        s.deleteB(search);
+      }
+      else s.deleteB(query);
+      cout << endl;
+      s.print_all();
+    }
 
     else if(action == PRINT){
       s.print_all();

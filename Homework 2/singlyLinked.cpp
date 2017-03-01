@@ -5,18 +5,7 @@
 using namespace std;
 
 // Given DLink, add to the list incrementally.
-void SinglyLinkedList::addB(){
-	string name;
-	float balance;
-	long int ID;
-	// User input
-	cout << "Enter a name, balance and ID(in order)" << endl;
-	cin >> name >> balance >> ID;
-
-	// Create necessary objects
-	basicAccount* info = new basicAccount(ID, name, balance);
-	SLink* p = new SLink(info);
-
+bool SinglyLinkedList::addB(SLink* p){
 	SLink* curr = head;
 	// If empty list
 	if(curr == NULL){append(p); return 1;}
@@ -25,8 +14,6 @@ void SinglyLinkedList::addB(){
 			// If acctNum found in list
 			if(curr->b.getAcctNum() == p->b.getAcctNum()){
 				cout << "Error: Account Number Already in Use." << endl;
-				delete link;
-				delete info;
 				return 0;
 			}
 
@@ -35,14 +22,23 @@ void SinglyLinkedList::addB(){
 				// If the head is bigger than the insert node
 				if(curr->b.getAcctNum() > p->b.getAcctNum()){
 					p->next = curr;
-					setHead(p);
+					head = p;
 					return 1;
 				}
 			}
-
 			// Reach the end of the list
-			if(curr->next->next == NULL){
+			if(curr->next == NULL){
 				if(curr->b.getAcctNum() > p->b.getAcctNum()){
+					p->next = curr->next;
+					curr->next = p;
+				}
+				else append(p);
+				return 1;
+			}
+
+			// If the final at 1 before the final node
+			if(curr->next->next == NULL){
+				if(curr->next->b.getAcctNum() > p->b.getAcctNum()){
 					p->next = curr->next;
 					curr->next = p;
 				}
@@ -61,8 +57,6 @@ void SinglyLinkedList::addB(){
 				curr = curr->next;
 		}
 	}
-	delete link;
-	delete info;
 	return 0;
 }
 
@@ -86,9 +80,9 @@ void SinglyLinkedList::findB(string name){
 	return;
 }
 
-void DoublyLinkedList::findB(long int id){
+void SinglyLinkedList::findB(long int id){
 	cout << "Find " << id << "..." << endl;
-	typedef std::shared_ptr<my_type_t> my_type_ptr;Link* curr = head;
+	SLink* curr = head;
 	// Traverse to S
 	while(curr){
 		if(curr->b.getAcctNum() == id){
@@ -109,26 +103,33 @@ void DoublyLinkedList::findB(long int id){
 void SinglyLinkedList::deleteB(string name){
 	cout << "Delete " << name << "..." << endl;
   SLink* curr = head;
-  // Traverse to S
+	// If empty
+	if(curr == NULL){
+		cout << "Empty List!" << endl;
+		return;
+	}
+
+	// IF first node is match
+	if(curr->b.getName() == name){
+		setHead(curr->next);
+		delete curr;
+		cout << "Deleted " << name << endl;
+		return;
+	}
+
+  // Traverse to name
   while(curr){
-		if(curr->b.getName() == name){
-			// IF has prev and next
-			if(curr->next && curr->prev){
-				curr->next->prev = curr->prev;
-				curr->prev->next = curr->next;
+		// If the next node is a match
+		if(curr->next->b.getName() == name){
+			// Within list
+			if(curr->next->next){
+				curr->next = curr->next->next;
 			}
-			else if(curr->prev){
-				curr->prev->next = NULL;
-				tail = curr->prev;
+			// At one before end
+			else {
+				curr->next = NULL;
 			}
-			else if(curr->next){
-				if(curr == head) setHead(curr->next);
-				curr->next->prev = NULL;
-			}
-			else{
-				head = NULL;
-			}
-			delete curr;
+			delete curr->next;
 			cout << "Deleted " << name << endl;
 			return;
 		}
@@ -142,46 +143,52 @@ void SinglyLinkedList::deleteB(string name){
 
 void SinglyLinkedList::deleteB(long int id){
 	cout << "Delete " << id << "..." << endl;
-	DLink* curr = head;
-	// Traverse to S
-	while(curr){
-		if(curr->b.getAcctNum() == id){
-			// IF has prev and next
-			if(curr->next && curr->prev){
-				curr->next->prev = curr->prev;
-				curr->prev->next = curr->next;
+  SLink* curr = head;
+	// If empty
+	if(curr == NULL){
+		cout << "Empty List!" << endl;
+		return;
+	}
+
+	// IF first node is match
+	if(curr->b.getAcctNum() == id){
+		setHead(curr->next);
+		delete curr;
+		cout << "Deleted " << id << endl;
+		return;
+	}
+
+  // Traverse to name
+  while(curr){
+		// If the next node is a match
+		if(curr->next->b.getAcctNum() == id){
+			// Within list
+			if(curr->next->next){
+				curr->next = curr->next->next;
 			}
-			else if(curr->prev){
-				curr->prev->next = NULL;
+			// At one before end
+			else {
+				curr->next = NULL;
 			}
-			else if(curr->next){
-				if(curr == head) setHead(curr->next);
-				curr->next->prev = NULL;
-			}
-			else{
-				head = NULL;
-			}
-			delete curr;
+			delete curr->next;
 			cout << "Deleted " << id << endl;
 			return;
 		}
 
 		// Waterfall
 		else curr = curr->next;
-	}
+  }
 	cout << "Error: Not Found" << endl;
 	return;
 }
 
-void SinglyLinkedList::append(DLink *p) {
+void SinglyLinkedList::append(SLink *p) {
 	cout << "Append " << p->b.getName() << endl;
 	if (head == NULL) {
 		head = p;
-		p->prev = NULL;
 	}
 	if (tail != NULL) {
 		tail->next = p;
-		p->prev = tail;
 	}
 	p->next = NULL;
 	tail = p;
@@ -202,7 +209,7 @@ void SinglyLinkedList::print_all() {
 	SLink* curr = head;
 	if(head == NULL){ cout << "Empty List!" << endl; return; }
 	while (curr) {
-		cout << curr->value;
+		cout << curr->b.getName() << " (" << curr->b.getAcctNum() << ")";
 		if (curr = curr->next) cout << ", ";
 	}
 	cout << "\n";
