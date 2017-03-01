@@ -15,12 +15,16 @@ int main(){
   SinglyLinkedList s;
 
   while(1){
-    int action;
+    char action;
     cout << "\nAction:\n(1) Create Account\n(2) Find Customer\n(3) Delete Customer\n(4) Print All\n";
     cin >> action;
 
+    // Invalid input
+    if(!isdigit(action)){
+      cout << endl << "Invalid rule, try again." << endl;
+    }
     // Create account
-    if(action == CREATE){
+    else if(action-'0' == CREATE){
       string name;
       float balance;
       long int ID;
@@ -45,7 +49,7 @@ int main(){
     }
 
     //Find Account
-    else if(action == FIND){
+    else if(action-'0' == FIND){
       string query;
       cout << "Search by Name or Account Number: " << endl;
       cin >> query;
@@ -59,7 +63,7 @@ int main(){
     }
 
     // Delete Account
-    else if(action == DELETE){
+    else if(action-'0' == DELETE){
       string query;
       cout << "Delete by Name or Account Number: " << endl;
       cin >> query;
@@ -72,13 +76,8 @@ int main(){
       s.print_all();
     }
 
-    else if(action == PRINT){
+    else if(action-'0' == PRINT){
       s.print_all();
-    }
-
-    // Invalid input
-    else{
-      cout << endl << "Invalid rule, try again." << endl;
     }
 
   }
