@@ -5,7 +5,7 @@ using namespace std;
 
 // Given DLink, add to the list incrementally.
 bool DoublyLinkedList::addB(DLink *p){
-	DLink* curr = getHead();
+	DLink* curr = head;
 	if(curr == NULL){append(p); return 1;}
 	else{
 		while(curr){
@@ -16,7 +16,7 @@ bool DoublyLinkedList::addB(DLink *p){
 			}
 
 			// IF at the head
-			if(curr == getHead()){
+			if(curr == head){
 				if(curr->b.getAcctNum() > p->b.getAcctNum()){
 					curr->prev = p;
 					p->next = curr;
@@ -50,11 +50,12 @@ bool DoublyLinkedList::addB(DLink *p){
 				curr = curr->next;
 		}
 	}
+	return 0;
 }
 
 void DoublyLinkedList::findB(string name){
 	cout << "Find " << name << "..." << endl;
-  DLink* curr = getHead();
+  DLink* curr = head;
   // Traverse to S
   while(curr){
 		if(curr->b.getName() == name){
@@ -74,11 +75,11 @@ void DoublyLinkedList::findB(string name){
 
 void DoublyLinkedList::findB(long int id){
 	cout << "Find " << id << "..." << endl;
-	DLink* curr = getHead();
+	DLink* curr = head;
 	// Traverse to S
 	while(curr){
 		if(curr->b.getAcctNum() == id){
-			cout << curr->b.getName() << endl;
+			cout << endl << curr->b.getName() << endl;
 			cout << "=========" << endl;
 			cout << "Account Number: " << curr->b.getAcctNum() << endl;
 			cout << "Balance: " << curr->b.getBalance() << endl;
@@ -94,7 +95,7 @@ void DoublyLinkedList::findB(long int id){
 
 void DoublyLinkedList::deleteB(string name){
 	cout << "Delete " << name << "..." << endl;
-  DLink* curr = getHead();
+  DLink* curr = head;
   // Traverse to S
   while(curr){
 		if(curr->b.getName() == name){
@@ -108,7 +109,7 @@ void DoublyLinkedList::deleteB(string name){
 				tail = curr->prev;
 			}
 			else if(curr->next){
-				if(curr == getHead()) setHead(curr->next);
+				if(curr == head) setHead(curr->next);
 				curr->next->prev = NULL;
 			}
 			else{
@@ -128,7 +129,7 @@ void DoublyLinkedList::deleteB(string name){
 
 void DoublyLinkedList::deleteB(long int id){
 	cout << "Delete " << id << "..." << endl;
-	DLink* curr = getHead();
+	DLink* curr = head;
 	// Traverse to S
 	while(curr){
 		if(curr->b.getAcctNum() == id){
@@ -141,7 +142,7 @@ void DoublyLinkedList::deleteB(long int id){
 				curr->prev->next = NULL;
 			}
 			else if(curr->next){
-				if(curr == getHead()) setHead(curr->next);
+				if(curr == head) setHead(curr->next);
 				curr->next->prev = NULL;
 			}
 			else{
@@ -224,7 +225,7 @@ void DoublyLinkedList::add(DLink* p, DLink *n) {  //insert n after p
 
 void DoublyLinkedList::erase(DLink *p) {   //delete element p
 	cout << "Deleting " << p->b.getName() << "..." << endl;
-	DLink* curr = getHead();
+	DLink* curr = head;
 	// IF empty list
 	if(curr == NULL) return;
 
@@ -246,7 +247,7 @@ void DoublyLinkedList::erase(DLink *p) {   //delete element p
 // Find node
 DLink* DoublyLinkedList::find(string s){
   cout << "Find " << s << "..." << endl;
-  DLink* curr = this->getHead();
+  DLink* curr = head;
 
   // Traverse to S
   while(curr->b.getName() != s){
@@ -259,7 +260,7 @@ DLink* DoublyLinkedList::find(string s){
 
 DLink* DoublyLinkedList::advance(int n){
   cout << "Advance " << n << "..." << endl;
-  DLink* curr = this->getHead();
+  DLink* curr = head;
 
   // Traverse n
   for(int i = 0; i < n; ++i){
