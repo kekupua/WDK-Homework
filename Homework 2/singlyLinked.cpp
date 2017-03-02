@@ -182,6 +182,7 @@ void SinglyLinkedList::deleteB(long int id){
 	return;
 }
 
+// Append the node p
 void SinglyLinkedList::append(SLink *p) {
 	cout << "Append " << p->b.getName() << endl;
 	if (head == NULL) {
@@ -195,16 +196,7 @@ void SinglyLinkedList::append(SLink *p) {
 	return;
 }
 
-int SinglyLinkedList::getSize(){
-	SLink* curr = head;
-	int count = 0;
-	while(curr){
-		++count;
-		curr = curr->next;
-	}
-	return count;
-}
-
+// Prints all nodes with acctNum
 void SinglyLinkedList::print_all() {
 	SLink* curr = head;
 	if(head == NULL){ cout << "Empty List!" << endl; return; }
