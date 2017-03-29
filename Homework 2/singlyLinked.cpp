@@ -4,7 +4,7 @@
 #include "basicAccount.h"
 using namespace std;
 
-// Given DLink, add to the list incrementally.
+// Given SLink, add to the list incrementally.
 bool SinglyLinkedList::addB(SLink* p){
 	SLink* curr = head;
 	// If empty list

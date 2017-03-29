@@ -11,23 +11,20 @@ bool compareByTime(struct Action &a, struct Action &b){
     return a.timeDelay < b.timeDelay;
 }
 
-void insertOne(int* packet, int* lambda, int* mew1, int* mew2, int* mew3, vector<Action>& callQ, queue<int>& one){
+void insertOne(int* packet, int* lambda, queue<int>& one, SinglyLinkedList list){
   float timeChange = *lambda;
   cout << *lambda << endl;
 
   // Attempt to insert into queue
-  if(one.size() < QONE){
+  if(one.size() < 8){
     // Take the time to load in the packet
-    wait(timeChange/1000);
+    wait(timeChange);
     cout << *packet << " inserted" << endl;
     one.push(*packet);
   }
   else{
-    cout << "Error! Queue is full" << endl;
+    cout << "Error, Queue is full! Packet dropped." << endl;
   }
-
-  // Calculate new lambda time
-  *lambda = rand()%1000 + 2000; // Entrance between 2000 and 2999 miliseconds
 
 }
 

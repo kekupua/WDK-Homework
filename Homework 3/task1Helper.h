@@ -1,23 +1,32 @@
-#define QONE 8
-#define QTWO 10
-#define QTHREE 13
-#include <ctime>
+#ifndef HELPER_H
+#define HELPER_H
+#define X 1
+#define Y 100
 #include <queue>
-#include <vector>
 #include <stdlib.h>
 #include <iostream>
-#include <algorithm>
 #include <time.h>
+#include <fstream>
+#include "singlyLinked.h"
 using namespace std;
 
-enum Actions { iOne, pOne, iTwo, pTwo, iThree, pThree };
-
-struct Action{
-  Actions type;
-  int timeDelay;
-};
-
+/**
+ * For the given seconds, sleep the program
+ * @param seconds [Time delay in seconds]
+ */
 void wait(int seconds);
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Compares the time value of two structs
@@ -27,16 +36,8 @@ void wait(int seconds);
  */
 bool compareByTime(struct Action &a, struct Action &b);
 
-/**
- * Insert into the first queue
- * @param packet [Value to be insert]
- * @param lambda [Time delay for first queue entrance]
- * @param mew1   [Time delay for first queue processing]
- * @param mew2   [Time delay for second queue processing]
- * @param mew3   [Time delay for third queue processing]
- * @param callQ  [Function call queue]
- */
-void insertOne(int* packet, int* lambda, int* mew1, int* mew2, int* mew3, vector<Action>& callQ, queue<int>& one);
+
+void insertOne(int* packet, int* lambda, queue<int>& one, SinglyLinkedList list);
 
 /**
  * Process and exit from first queue
@@ -92,3 +93,4 @@ void insertOne(int* packet, int* lambda, int* mew1, int* mew2, int* mew3, vector
  * @param callQ  [Function call queue]
  */
 //void processThree(int packet, int lambda, int mew1, int mew2, int mew3, vector<Actions>& callQ, queue<int>& three);
+#endif

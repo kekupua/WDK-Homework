@@ -1,3 +1,4 @@
+#include "singlyLinked.h"
 #include "task1Helper.h"
 using namespace std;
 // 1 input, 2 outgoing queues
@@ -7,35 +8,39 @@ using namespace std;
 // 3: after processing, goes into 2nd or 3rd queue randomly
 // 3.5: if queue entering is full, drop request and send error
 // 4: head of queue 2,3 enters processing
+// Any action requires a New node be made and added to the list
 
+int t = 0;
 int main(){
   // Setup
-  vector<Action> callQ; // Call queue
+  SinglyLinkedList s;
+  fstream config;
+  config.open("config.txt");
+
+  int q1a, q1b, q1p, q1e, Q1, q2p, q2e, Q2, q3p, q3e, Q3;
+  config >> q1a >> q1b >> q1p >> q1e >> Q1;
+  config >> q2p >> q2e >> Q2;
+  config >> q3p >> q3e >> Q3;
+
   queue<int> first; // Entrance queue
   queue<int> second, third; // Exit queues
-  int packet = rand()%10 + 1; // Random packet value between 1 and 10
-  int lambda = rand()%1000 + 2000; // Entrance between 2000 and 2999 miliseconds
-  int mew1 = rand()%1000 + 3000; // Processing Q1 time between 3000 and 3999 miliseconds
-  int mew2 = 0;
-  int mew3 = 0;
-  //int mew2 = rand()%1000 + 1000; // Processing Q2 time between 1000 and 1999 miliseconds
-  //int mew3 = rand()%1000 + 500;  // Processing Q3 time between 500 and 1499 miliseconds
-  //lambda = rand()%1000 + 2000; // Entrance between 2000 and 2999 miliseconds
-  //action = checkQueue();
-  //delay(lambda);
+  int packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
+  int lambda = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
 
   first.push(packet);
   Action aFirst;
   aFirst.type = iOne;
   aFirst.timeDelay = lambda;
-  callQ.push_back(aFirst);
+
+  // Loop
   while(1){
     // Check the queue
-    Actions mainAction = callQ[0].type;
+    Actions mainAction = iOne;
 
     // IF insert at queue one
     if(mainAction == iOne){
-      insertOne(&packet, &lambda, &mew1, &mew2, &mew3, callQ, first);
+      insertOne(&packet, &lambda, first, s);
+      lambda = rand()%q1b + q1a; // Calculate new lambda time between q1a and q1b seconds
     }
     // else if(mainAction == pOne){
     //   processOne(packet,lambda,mew1,mew2,mew3,callQ,first);
@@ -52,9 +57,6 @@ int main(){
     // else{ // pThree
     //   processThree(packet,lambda,mew1,mew2,mew3,callQ,third);
     // }
-
-    // Resort the Queue based on shortest time
-    sort(callQ.begin(), callQ.end(), compareByTime);
   }
 
   return 0;
