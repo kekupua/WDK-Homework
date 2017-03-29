@@ -6,16 +6,19 @@ using namespace std;
 enum Actions {iOne, pOne, pTwo, pThree};
 
 struct Action{
+	Action() { }
+	Action(Actions t, int eT) : type(t), executeTime(eT) {}
   Actions type;
-  int timeDelay;
+  int executeTime;
 };
 
 struct SLink { //singly linked node
 	int value;
 	struct Action a;
 	SLink* next;
-	SLink(int v, SLink* n = 0)
-		:value(v), next(n) {}
+	SLink(struct Action act) : a(act){ value = 0; next = NULL; }
+	SLink(Actions t, int eT) : a(t,eT) { value = 0; next = NULL; }
+	SLink(int v, SLink* n = 0) : value(v), next(n) {}
 };
 
 class SinglyLinkedList {

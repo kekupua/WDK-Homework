@@ -11,7 +11,7 @@ void SinglyLinkedList::addS(SLink* p){
 			// IF at the head
 			if(curr == head){
 				// If the head is bigger than the insert node
-				if(curr->a.timeDelay > p->a.timeDelay){
+				if(curr->a.executeTime > p->a.executeTime){
 					p->next = curr;
 					head = p;
 					return;
@@ -19,7 +19,7 @@ void SinglyLinkedList::addS(SLink* p){
 			}
 			// Reach the end of the list
 			if(curr->next == NULL){
-				if(curr->a.timeDelay > p->a.timeDelay){
+				if(curr->a.executeTime > p->a.executeTime){
 					p->next = curr->next;
 					curr->next = p;
 				}
@@ -28,7 +28,7 @@ void SinglyLinkedList::addS(SLink* p){
 			}
 			// If the final at 1 before the final node
 			if(curr->next->next == NULL){
-				if(curr->next->a.timeDelay > p->a.timeDelay){
+				if(curr->next->a.executeTime > p->a.executeTime){
 					p->next = curr->next;
 					curr->next = p;
 				}
@@ -36,7 +36,7 @@ void SinglyLinkedList::addS(SLink* p){
 				return;
 			}
 			// In the list
-			if(curr->next->a.timeDelay > p->a.timeDelay && curr->a.timeDelay < p->a.timeDelay){
+			if(curr->next->a.executeTime > p->a.executeTime && curr->a.executeTime < p->a.executeTime){
 				p->next = curr->next;
 				curr->next = p;
 				return;
@@ -102,7 +102,7 @@ void SinglyLinkedList::add(SLink* p, SLink *n){
 
 // Erase node at p
 void SinglyLinkedList::erase(SLink *p) {
-	cout << "Erase " << p->value << endl;
+	cout << "Erase Head" << endl;
   SLink* curr = this->getHead();
 
 	// If first node

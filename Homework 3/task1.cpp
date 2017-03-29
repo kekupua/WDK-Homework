@@ -22,15 +22,21 @@ int main(){
   config >> q2p >> q2e >> Q2;
   config >> q3p >> q3e >> Q3;
 
-  queue<int> first; // Entrance queue
-  queue<int> second, third; // Exit queues
+  // queue<int> first; // Entrance queue
+  // queue<int> second, third; // Exit queues
+  int* firstQ = new int[Q1];
+  int* secondQ = new int[Q2];
+  int* thirdQ = new int[Q3];
   int packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
-  int lambda = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
+  int lambda1 = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
+  int mew1 = rand()%q1e + q1p;
+  int mew2 = 0;
+  int mew3 = 0;
 
-  first.push(packet);
-  Action aFirst;
-  aFirst.type = iOne;
-  aFirst.timeDelay = lambda;
+  SLink iLink1(iOne, lambda1);
+  SLink pLink1(pOne, mew1);
+  SLink pLink2(pTwo, mew2);
+  SLink pLink3(pThree, mew3);
 
   // Loop
   while(1){
@@ -39,9 +45,10 @@ int main(){
 
     // IF insert at queue one
     if(mainAction == iOne){
-      insertOne(&packet, &lambda, first, s);
-      lambda = rand()%q1b + q1a; // Calculate new lambda time between q1a and q1b seconds
+      lambda1 = rand()%q1b + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
+      insertOne(packet, lambda1, s, t);
     }
+
     // else if(mainAction == pOne){
     //   processOne(packet,lambda,mew1,mew2,mew3,callQ,first);
     // }
@@ -57,6 +64,10 @@ int main(){
     // else{ // pThree
     //   processThree(packet,lambda,mew1,mew2,mew3,callQ,third);
     // }
+
+    ++t;
+    packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
+    wait(1);
   }
 
   return 0;

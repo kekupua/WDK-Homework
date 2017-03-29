@@ -1,26 +1,24 @@
 #include "task1Helper.h"
 using namespace std;
 
-void wait(float seconds){
+void wait(int seconds){
 	clock_t endwait;
 	endwait = clock() + seconds * CLOCKS_PER_SEC;
 	while (clock() < endwait) {}
 }
 
 bool compareByTime(struct Action &a, struct Action &b){
-    return a.timeDelay < b.timeDelay;
+    return a.executeTime < b.executeTime;
 }
 
-void insertOne(int* packet, int* lambda, queue<int>& one, SinglyLinkedList list){
-  float timeChange = *lambda;
-  cout << *lambda << endl;
+void insertOne(int packet, int lambda, SinglyLinkedList list, int timeElapsed){
+  cout << "Time: " << lambda-timeElapsed << " seconds..." << endl;
 
   // Attempt to insert into queue
-  if(one.size() < 8){
+  if(timeElapsed < 8){
     // Take the time to load in the packet
-    wait(timeChange);
-    cout << *packet << " inserted" << endl;
-    one.push(*packet);
+    wait(lambda-timeElapsed);
+    cout << packet << " inserted" << endl;
   }
   else{
     cout << "Error, Queue is full! Packet dropped." << endl;
