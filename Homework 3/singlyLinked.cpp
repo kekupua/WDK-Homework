@@ -36,7 +36,7 @@ void SinglyLinkedList::addS(SLink* p){
 				return;
 			}
 			// Insert between two nodes
-			if(curr->next->a.executeTime > p->a.executeTime && curr->a.executeTime < p->a.executeTime){
+			if(curr->next->a.executeTime >= p->a.executeTime && curr->a.executeTime <= p->a.executeTime){
 				p->next = curr->next;
 				curr->next = p;
 				return;

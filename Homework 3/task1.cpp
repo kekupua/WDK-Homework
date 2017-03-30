@@ -28,24 +28,23 @@ int main(){
   int packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
   int lambda1 = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
   int mew1 = rand()%q1e + q1p;
-  int mew2 = 0;
-  int mew3 = 0;
 
   SLink* iLink1 = new SLink(iOne, lambda1);
   s.addS(iLink1);
   insertOne(packet, lambda1, mew1, &s, t, Q1);
   // Loop
   while(1){
-    // Check the queue
     bool ran = 0;
+    // Check the queue
     Action mainAction = s.getHead()->a;
     cout << "Type: " << mainAction.type << " Time: " << mainAction.executeTime << endl;
 
-    // Recalulate load times
+    // Recalulate
+    packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
     lambda1 = rand()%q1b + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
     mew1 = rand()%q1e + q1p + t; // Calculate new mew time between q1p and q1e, adjusted for t
-    mew2 = rand()%q2e + q2p + t; // Calculate new mew time between q2p and q2e, adjusted for t
-    mew3 = rand()%q3e + q3p + t; // Calculate new mew time between q3p and q3e, adjusted for t
+    int mew2 = rand()%q2e + q2p + t; // Calculate new mew time between q2p and q2e, adjusted for t
+    int mew3 = rand()%q3e + q3p + t; // Calculate new mew time between q3p and q3e, adjusted for t
 
     // IF insert at queue one
     if(mainAction.type == iOne && mainAction.executeTime == t){
@@ -57,27 +56,20 @@ int main(){
       processOne(packet, mew1, mew2, mew3, &s, t, Q1);
       ran = 1;
     }
-    // else if(mainAction == iTwo){
-    //   insertTwo(packet,lambda,mew1,mew2,mew3,callQ,second);
-    //   ran = 1;
-    // }
-    // else if(mainAction == pTwo){
-    //   processTwo(packet,lambda,mew1,mew2,mew3,callQ,second);
-    //   ran = 1;
-    // }
-    // else if(mainAction == iThree){
-    //   insertThree(packet,lambda,mew1,mew2,mew3,callQ,third);
-    //   ran = 1;
-    // }
-    // else{ // pThree
-    //   processThree(packet,lambda,mew1,mew2,mew3,callQ,third);
-    //   ran = 1;
-    // }
+    if(mainAction.type == pTwo && mainAction.executeTime == t){
+      processTwo(packet, mew2, &s, t, Q2);
+      ran = 1;
+    }
+    if(mainAction.type == pThree && mainAction.executeTime == t){
+      processThree(packet, mew3, &s, t, Q3);
+      ran = 1;
+    }
     if(!ran){
       cout << "\nWaiting..." << " (t = "<< t << ")" <<  endl;
     }
+    else --t;
 
-    packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
+    // Print call list
     s.print_all(s.getHead());
     ++t;
     wait(1);
