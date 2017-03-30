@@ -26,22 +26,22 @@ void SinglyLinkedList::addS(SLink* p){
 				else append(p);
 				return;
 			}
-			// If the final at 1 before the final node
+			// If the at 1 before the final node
 			if(curr->next->next == NULL){
-				if(curr->next->a.executeTime > p->a.executeTime){
+				if(curr->next->a.executeTime >= p->a.executeTime){
 					p->next = curr->next;
 					curr->next = p;
 				}
 				else append(p);
 				return;
 			}
-			// In the list
+			// Insert between two nodes
 			if(curr->next->a.executeTime > p->a.executeTime && curr->a.executeTime < p->a.executeTime){
 				p->next = curr->next;
 				curr->next = p;
 				return;
 			}
-			else curr = curr->next;
+			curr = curr->next;
 		}
 	}
 	return;
@@ -49,15 +49,16 @@ void SinglyLinkedList::addS(SLink* p){
 
 // Append p to the end of the list
 void SinglyLinkedList::append(SLink *p) {
-	cout << "Append " << p->value << endl;
+	//cout << "Append Type: " << p->a.type << endl;
 	if (head == NULL) {
 		head = p;
 	}
-	if (tail != NULL) {
-		tail->next = p;
-	}
-	p->next = NULL;
+	SLink* curr = head;
+	while(curr->next)
+		curr = curr->next;
+	curr->next = p;
 	tail = p;
+	p->next = NULL;
 	return;
 }
 
@@ -102,24 +103,11 @@ void SinglyLinkedList::add(SLink* p, SLink *n){
 
 // Erase node at p
 void SinglyLinkedList::erase(SLink *p) {
-	cout << "Erase Head" << endl;
-  SLink* curr = this->getHead();
-
-	// If first node
-	if(curr == p){
-		setHead(p->next);
-		delete[] p;
-		return;
-	}
-
-  // Traverse to P
-  while(curr->next != p){
-    // If no other nodes
-    if(curr->next == NULL) return;
-    curr = curr->next;
-  }
-  curr->next = curr->next->next;
-  delete[] p;
+	cout << "Erase" << endl;
+  SLink* curr = head;
+	if(curr == NULL) return;
+	head = curr->next;
+	delete curr;
 	return;
 }
 
@@ -159,7 +147,7 @@ int SinglyLinkedList::getSize(){
 
 void SinglyLinkedList::print_all(SLink* head) {
 	while (head) {
-		cout << head->value;
+		cout << head->a.type << "( " << head->a.executeTime << " )";
 		if (head = head->next) cout << ", ";
 	}
 	cout << "\n";

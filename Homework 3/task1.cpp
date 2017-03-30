@@ -22,8 +22,6 @@ int main(){
   config >> q2p >> q2e >> Q2;
   config >> q3p >> q3e >> Q3;
 
-  // queue<int> first; // Entrance queue
-  // queue<int> second, third; // Exit queues
   int* firstQ = new int[Q1];
   int* secondQ = new int[Q2];
   int* thirdQ = new int[Q3];
@@ -33,25 +31,29 @@ int main(){
   int mew2 = 0;
   int mew3 = 0;
 
-  SLink iLink1(iOne, lambda1);
-  SLink pLink1(pOne, mew1);
-  SLink pLink2(pTwo, mew2);
-  SLink pLink3(pThree, mew3);
-
+  SLink* iLink1 = new SLink(iOne, lambda1);
+  s.addS(iLink1);
+  insertOne(packet, lambda1, mew1, &s, t, Q1);
   // Loop
   while(1){
     // Check the queue
-    Actions mainAction = iOne;
+    Action mainAction = s.getHead()->a;
+    cout << "Type: " << mainAction.type << " Time: " << mainAction.executeTime << endl;
+
+    // Recalulate load times
+    lambda1 = rand()%q1b + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
+    mew1 = rand()%q1e + q1p + t; // Calculate new mew time between q1p and q1e, adjusted for t
+    mew2 = rand()%q2e + q2p + t; // Calculate new mew time between q2p and q2e, adjusted for t
+    mew3 = rand()%q3e + q3p + t; // Calculate new mew time between q3p and q3e, adjusted for t
 
     // IF insert at queue one
-    if(mainAction == iOne){
-      lambda1 = rand()%q1b + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
-      insertOne(packet, lambda1, s, t);
+    if(mainAction.type == iOne && mainAction.executeTime == t){
+      insertOne(packet, lambda1, mew1, &s, t, Q1);
     }
 
-    // else if(mainAction == pOne){
-    //   processOne(packet,lambda,mew1,mew2,mew3,callQ,first);
-    // }
+    else if(mainAction.type == pOne && mainAction.executeTime == t){
+      processOne(packet, mew1, mew2, mew3, s, t, Q1);
+    }
     // else if(mainAction == iTwo){
     //   insertTwo(packet,lambda,mew1,mew2,mew3,callQ,second);
     // }
@@ -64,9 +66,13 @@ int main(){
     // else{ // pThree
     //   processThree(packet,lambda,mew1,mew2,mew3,callQ,third);
     // }
+    else {
+      cout << "\nWaiting..." << " (t = "<< t << " )"<<  endl;
+    }
 
-    ++t;
     packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
+    s.print_all(s.getHead());
+    ++t;
     wait(1);
   }
 
