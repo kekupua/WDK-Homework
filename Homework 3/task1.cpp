@@ -37,6 +37,7 @@ int main(){
   // Loop
   while(1){
     // Check the queue
+    bool ran = 0;
     Action mainAction = s.getHead()->a;
     cout << "Type: " << mainAction.type << " Time: " << mainAction.executeTime << endl;
 
@@ -49,25 +50,31 @@ int main(){
     // IF insert at queue one
     if(mainAction.type == iOne && mainAction.executeTime == t){
       insertOne(packet, lambda1, mew1, &s, t, Q1);
+      ran = 1;
     }
 
-    else if(mainAction.type == pOne && mainAction.executeTime == t){
-      processOne(packet, mew1, mew2, mew3, s, t, Q1);
+    if(mainAction.type == pOne && mainAction.executeTime == t){
+      processOne(packet, mew1, mew2, mew3, &s, t, Q1);
+      ran = 1;
     }
     // else if(mainAction == iTwo){
     //   insertTwo(packet,lambda,mew1,mew2,mew3,callQ,second);
+    //   ran = 1;
     // }
     // else if(mainAction == pTwo){
     //   processTwo(packet,lambda,mew1,mew2,mew3,callQ,second);
+    //   ran = 1;
     // }
     // else if(mainAction == iThree){
     //   insertThree(packet,lambda,mew1,mew2,mew3,callQ,third);
+    //   ran = 1;
     // }
     // else{ // pThree
     //   processThree(packet,lambda,mew1,mew2,mew3,callQ,third);
+    //   ran = 1;
     // }
-    else {
-      cout << "\nWaiting..." << " (t = "<< t << " )"<<  endl;
+    if(!ran){
+      cout << "\nWaiting..." << " (t = "<< t << ")" <<  endl;
     }
 
     packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100

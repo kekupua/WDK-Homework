@@ -103,7 +103,7 @@ void SinglyLinkedList::add(SLink* p, SLink *n){
 
 // Erase node at p
 void SinglyLinkedList::erase(SLink *p) {
-	cout << "Erase" << endl;
+	// cout << "Erase" << endl;
   SLink* curr = head;
 	if(curr == NULL) return;
 	head = curr->next;

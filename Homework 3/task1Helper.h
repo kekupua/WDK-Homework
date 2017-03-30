@@ -38,7 +38,7 @@ bool compareByTime(struct Action &a, struct Action &b);
 
 
 void insertOne(int packet, int lambda1, int mew1, SinglyLinkedList* list, int time, int qSize);
-void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList list, int time, int qSize);
+void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list, int time, int qSize);
 
 /**
  * Process and exit from first queue
