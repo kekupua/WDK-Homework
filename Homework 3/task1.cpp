@@ -74,6 +74,12 @@ int main(){
 
     // Print call list
     s.print_all(s.getHead());
+    cout << "Q1: \t";
+    printQ(firstQ,Q1,itQ1);
+    cout << "Q2: \t";
+    printQ(secondQ,Q2,itQ2);
+    cout << "Q3: \t";
+    printQ(thirdQ,Q3,itQ3);
     ++t;
     wait(1);
   }

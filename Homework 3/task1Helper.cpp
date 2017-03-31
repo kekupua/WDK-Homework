@@ -24,10 +24,11 @@ void enqueue(int queue[], int qSize, int it, int packet){
 	return;
 }
 
-void dequeue(int queue[], int qSize, int* it){
+int dequeue(int queue[], int qSize, int* it){
+	int temp = queue[*it];
 	queue[*it] = 0;
 	*it = (*it+1)%qSize;
-	return;
+	return temp;
 }
 
 void printQ(int queue[], int qSize, int it){
@@ -47,8 +48,6 @@ void insertOne(int packet, int lambda, int mew1, SinglyLinkedList* list, int tim
     // Take the time to load in the packet
     //wait(lambda-timeElapsed);
 		enqueue(queue1, qSize, it, packet);
-		cout << "Q1: \t";
-		printQ(queue1, qSize, it);
 		SLink* pFirst = new SLink(pOne, mew1);
 		list->addS(pFirst);
 		return;
@@ -71,12 +70,8 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 	// Attempt to send to queue 2
 	if(q){
 		if(!isFull(queue3, qSize3)){
-			dequeue(queue1, qSize1, it1);
+			packet = dequeue(queue1, qSize1, it1);
 			enqueue(queue2, qSize2, it2, packet);
-			cout << "Q1: \t";
-			printQ(queue1, qSize1, *it1);
-			cout << "Q2: \t";
-			printQ(queue2, qSize2, it2);
 			SLink* pSecond = new SLink(pTwo, mew2);
 			list->addS(pSecond);
 		}
@@ -87,12 +82,8 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 	// Attempt to send to queue 3
 	else {
 		if(!isFull(queue3, qSize3)){
-			dequeue(queue1, qSize1, it1);
+			packet = dequeue(queue1, qSize1, it1);
 			enqueue(queue3, qSize3, it3, packet);
-			cout << "Q1: \t";
-			printQ(queue1, qSize1, *it1);
-			cout << "Q3: \t";
-			printQ(queue3, qSize3, it3);
 			SLink* pThird = new SLink(pThree, mew3);
 			list->addS(pThird);
 		}
@@ -106,9 +97,7 @@ void processTwo(int packet, int mew2, SinglyLinkedList* list, int timeElapsed, i
 	list->erase(list->getHead());
 	wait(mew2-timeElapsed);
 
-	dequeue(queue, qSize, it);
-	cout << "Q2: \t";
-	printQ(queue, qSize, *it);
+	packet = dequeue(queue, qSize, it);
 	return;
 }
 
@@ -116,8 +105,6 @@ void processThree(int packet, int mew3, SinglyLinkedList* list, int timeElapsed,
 	cout << "\nProcess Three @ " << "[t = "<< timeElapsed << "]"<<  endl;
 	list->erase(list->getHead());
 	wait(mew3-timeElapsed);
-	dequeue(queue, qSize, it);
-	cout << "Q3: \t";
-	printQ(queue, qSize, *it);
+	packet = dequeue(queue, qSize, it);
 	return;
 }
