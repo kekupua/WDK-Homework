@@ -22,22 +22,25 @@ int main(){
   config >> q2p >> q2e >> Q2;
   config >> q3p >> q3e >> Q3;
 
+  int itQ1 = 0, itQ2 = 0, itQ3 = 0;
   int* firstQ = new int[Q1];
   int* secondQ = new int[Q2];
   int* thirdQ = new int[Q3];
+  for(int i = 0; i < Q1; ++i) firstQ[i] = 0;
+  for(int i = 0; i < Q2; ++i) secondQ[i] = 0;
+  for(int i = 0; i < Q3; ++i) thirdQ[i] = 0;
   int packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
   int lambda1 = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
   int mew1 = rand()%q1e + q1p;
 
   SLink* iLink1 = new SLink(iOne, lambda1);
   s.addS(iLink1);
-  insertOne(packet, lambda1, mew1, &s, t, Q1);
+  insertOne(packet, lambda1, mew1, &s, t, Q1, firstQ, itQ1);
   // Loop
   while(1){
     bool ran = 0;
     // Check the queue
     Action mainAction = s.getHead()->a;
-    cout << "Type: " << mainAction.type << " Time: " << mainAction.executeTime << endl;
 
     // Recalulate
     packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
@@ -48,20 +51,20 @@ int main(){
 
     // IF insert at queue one
     if(mainAction.type == iOne && mainAction.executeTime == t){
-      insertOne(packet, lambda1, mew1, &s, t, Q1);
+      insertOne(packet, lambda1, mew1, &s, t, Q1, firstQ, itQ1);
       ran = 1;
     }
 
     if(mainAction.type == pOne && mainAction.executeTime == t){
-      processOne(packet, mew1, mew2, mew3, &s, t, Q1);
+      processOne(packet, mew1, mew2, mew3, &s, t, firstQ, secondQ, thirdQ, Q1, Q2, Q3, &itQ1, itQ2, itQ3);
       ran = 1;
     }
     if(mainAction.type == pTwo && mainAction.executeTime == t){
-      processTwo(packet, mew2, &s, t, Q2);
+      processTwo(packet, mew2, &s, t, secondQ, Q2, &itQ2);
       ran = 1;
     }
     if(mainAction.type == pThree && mainAction.executeTime == t){
-      processThree(packet, mew3, &s, t, Q3);
+      processThree(packet, mew3, &s, t, thirdQ, Q3, &itQ3);
       ran = 1;
     }
     if(!ran){

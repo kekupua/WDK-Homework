@@ -16,9 +16,9 @@ using namespace std;
  */
 void wait(int seconds);
 
-void insertOne(int packet, int lambda1, int mew1, SinglyLinkedList* list, int time, int qSize);
-void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list, int time, int qSize);
-void processTwo(int packet, int mew2, SinglyLinkedList* list, int timeElapsed, int qSize);
-void processThree(int packet, int mew3, SinglyLinkedList* list, int timeElapsed, int qSize);
+void insertOne(int packet, int lambda1, int mew1, SinglyLinkedList* list, int time, int qSize, int queue1[], int iterator);
+void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list, int timeElapsed, int queue1[], int queue2[], int queue3[], int qSize1, int qSize2, int qSize3, int *it1, int it2, int it3);
+void processTwo(int packet, int mew2, SinglyLinkedList* list, int timeElapsed, int queue[], int qSize, int* it);
+void processThree(int packet, int mew3, SinglyLinkedList* list, int timeElapsed, int queue[], int qSize, int* it);
 
 #endif
