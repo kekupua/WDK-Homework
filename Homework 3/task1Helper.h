@@ -2,7 +2,7 @@
 #define HELPER_H
 #define X 1
 #define Y 100
-#include <queue>
+#include <vector>
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
@@ -15,6 +15,7 @@ using namespace std;
  * @param seconds [Time delay in seconds]
  */
 void wait(int seconds);
+int maxOrMin(int recent, int past, int type);
 bool isFull(int queue[], int qSize);
 void enqueue(int queue[], int qSize, int it, int packet);
 int dequeue(int queue[], int qSize, int* it);

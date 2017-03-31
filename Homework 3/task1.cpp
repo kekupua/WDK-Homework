@@ -12,8 +12,7 @@ using namespace std;
 
 int t = 0;
 int totalWait = 0;
-int minWait = 0;
-int maxWait = 0;
+int count = 0;
 int main(){
   // Setup
   SinglyLinkedList s;
@@ -33,8 +32,9 @@ int main(){
   for(int i = 0; i < Q2; ++i) secondQ[i] = 0;
   for(int i = 0; i < Q3; ++i) thirdQ[i] = 0;
   int packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
-  int lambda1 = rand()%q1b + q1a; // Entrance between q1a and q1b seconds
-  int mew1 = rand()%q1e + q1p;
+  int lambda1 = rand()%(q1b + 1 - q1a) + q1a; // Entrance between q1a and q1b seconds
+  int mew1 = rand()%(q1e + 1 - q1p) + q1p;
+  int mew1Av = 0, mew2Av = 0, mew3Av = 0, mew1Max = 0, mew2Max = 0, mew3Max = 0;
 
   SLink* iLink1 = new SLink(iOne, lambda1);
   s.addS(iLink1);
@@ -42,16 +42,21 @@ int main(){
   // Loop
   while(1){
     bool ran = 0;
-    float dropF = drop;
     // Check the queue
     Action mainAction = s.getHead()->a;
 
     // Recalulate
     packet = rand()%Y + X; // Random packet value between X and Y. X = 1, Y = 100
-    lambda1 = rand()%q1b + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
-    mew1 = rand()%q1e + q1p + t; // Calculate new mew time between q1p and q1e, adjusted for t
-    int mew2 = rand()%q2e + q2p + t; // Calculate new mew time between q2p and q2e, adjusted for t
-    int mew3 = rand()%q3e + q3p + t; // Calculate new mew time between q3p and q3e, adjusted for t
+    lambda1 = rand()%(q1b + 1 - q1a) + q1a + t; // Calculate new lambda time between q1a and q1b seconds, adjusted for t
+    mew1 = rand()%(q1e + 1 - q1p) + q1p + t; // Calculate new mew time between q1p and q1e, adjusted for t
+    int mew2 = rand()%(q2e + 1 - q2p) + q2p + t; // Calculate new mew time between q2p and q2e, adjusted for t
+    int mew3 = rand()%(q3e + 1 - q3p) + q3p + t; // Calculate new mew time between q3p and q3e, adjusted for t
+    mew1Av += lambda1+mew1-t-t;
+    mew2Av += mew2-t;
+    mew3Av += mew3-t;
+    mew1Max = maxOrMin(lambda1+mew1-t-t, mew1Max, 0);
+    mew2Max = maxOrMin(mew2-t, mew2Max, 0);
+    mew3Max = maxOrMin(mew3-t, mew3Max, 0);
 
     // IF insert at queue one
     if(mainAction.type == iOne && mainAction.executeTime == t){
@@ -80,19 +85,24 @@ int main(){
     }
     else --t;
     ++t;
+    ++count;
 
     // Print Stats
     s.print_all(s.getHead());
-    // cout << "Max wait for Q1 | Q2 | Q3:\t" << q1e << " | " << q2e << " | " << q3e << endl;
-    // cout << "Min wait for Q1 | Q2 | Q3:\t" << q1p << " | " << q2p << " | " << q3p << endl;
-    cout << "Packets Dropped (Total and average): " << drop << " | " << dropF/t << endl;
+    cout << "Average wait for Q1 | Q2 | Q3:\t" << (float) mew1Av/count << " | " << (float) mew2Av/count << " | " << (float) mew3Av/count << endl;
+    cout << "Max wait for Q1 | Q2 | Q3:\t" << mew1Max << " | " << mew2Max << " | " << mew3Max << endl;
+    cout << "Min wait for Q1 | Q2 | Q3:\t" << q1p << " | " << q2p << " | " << q3p << endl;
+    cout << "Std Deviation for Q1 | Q2 | Q3:\t" << mew1Std << " | " << mew2Std << " | " << mew3Std << endl;
+    cout << "Packets Dropped (Total and average): " << drop << " | " << (float) drop/t << endl;
     cout << "\nQ1: \t";
     printQ(firstQ,Q1,itQ1);
     cout << "Q2: \t";
     printQ(secondQ,Q2,itQ2);
     cout << "Q3: \t";
     printQ(thirdQ,Q3,itQ3);
-    wait(1);
+    wait(2);
+    system("cls");
+    system("clear");
   }
 
   return 0;

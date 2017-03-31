@@ -7,6 +7,19 @@ void wait(int seconds){
 	while (clock() < endwait) {}
 }
 
+int maxOrMin(int recent, int past, int type){
+	int value;
+	// Max
+	if(type == 0){
+		value = recent >= past ? recent : past;
+	}
+	// Min
+	if(type == 1){
+		value = recent <= past ? recent : past;
+	}
+	return value;
+}
+
 bool isFull(int queue[], int qSize){
 	for(int i = 0; i < qSize; ++i){
 		if(queue[i] == 0)
@@ -63,7 +76,7 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 
 	// Process...
 	// Decide where to put the packet
-	wait(mew1-timeElapsed);
+	//wait(mew1-timeElapsed);
 	bool q = rand()%2;
 
 	// Attempt to send to queue 2
@@ -94,7 +107,7 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 void processTwo(int packet, int mew2, SinglyLinkedList* list, int timeElapsed, int queue[], int qSize, int* it){
 	cout << "\nProcess Two @ " << "[t = "<< timeElapsed << "]"<<  endl;
 	list->erase(list->getHead());
-	wait(mew2-timeElapsed);
+	//wait(mew2-timeElapsed);
 
 	packet = dequeue(queue, qSize, it);
 	return;
@@ -103,7 +116,7 @@ void processTwo(int packet, int mew2, SinglyLinkedList* list, int timeElapsed, i
 void processThree(int packet, int mew3, SinglyLinkedList* list, int timeElapsed, int queue[], int qSize, int* it){
 	cout << "\nProcess Three @ " << "[t = "<< timeElapsed << "]"<<  endl;
 	list->erase(list->getHead());
-	wait(mew3-timeElapsed);
+	//wait(mew3-timeElapsed);
 	packet = dequeue(queue, qSize, it);
 	return;
 }
