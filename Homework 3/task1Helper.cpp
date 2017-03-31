@@ -38,15 +38,13 @@ void printQ(int queue[], int qSize, int it){
 	cout << endl;
 }
 
-void insertOne(int packet, int lambda, int mew1, SinglyLinkedList* list, int timeElapsed, int qSize, int queue1[], int it){
+void insertOne(int packet, int lambda, int mew1, SinglyLinkedList* list, int timeElapsed, int* drop, int qSize, int queue1[], int it){
   cout << "\nInsert One @ " << "[t = "<< timeElapsed << "]"<<  endl;
 	list->erase(list->getHead());
 	SLink* iFirst = new SLink(iOne, lambda);
 	list->addS(iFirst);
   // Attempt to insert into queue
   if(!isFull(queue1, qSize)){
-    // Take the time to load in the packet
-    //wait(lambda-timeElapsed);
 		enqueue(queue1, qSize, it, packet);
 		SLink* pFirst = new SLink(pOne, mew1);
 		list->addS(pFirst);
@@ -54,17 +52,18 @@ void insertOne(int packet, int lambda, int mew1, SinglyLinkedList* list, int tim
   }
   else{
     cout << "Error, Queue is full! Packet dropped." << endl;
+		++*drop;
 		return;
   }
 }
 
-void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list, int timeElapsed, int queue1[], int queue2[], int queue3[], int qSize1, int qSize2, int qSize3, int *it1, int it2, int it3){
+void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list, int timeElapsed, int* drop, int queue1[], int queue2[], int queue3[], int qSize1, int qSize2, int qSize3, int *it1, int it2, int it3){
 	cout << "\nProcess One @ " << "[t = "<< timeElapsed << "]"<<  endl;
 	list->erase(list->getHead());
 
 	// Process...
 	// Decide where to put the packet
-	//wait(mew1-timeElapsed);
+	wait(mew1-timeElapsed);
 	bool q = rand()%2;
 
 	// Attempt to send to queue 2
@@ -76,7 +75,7 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 			list->addS(pSecond);
 		}
 
-		else cout << "Second queue full! Packet dropped." << endl;
+		else { cout << "Second queue full! Packet dropped." << endl; ++*drop; }
 	}
 
 	// Attempt to send to queue 3
@@ -87,7 +86,7 @@ void processOne(int packet, int mew1, int mew2, int mew3, SinglyLinkedList* list
 			SLink* pThird = new SLink(pThree, mew3);
 			list->addS(pThird);
 		}
-		else cout << "Third queue full! Packet dropped." << endl;
+		else { cout << "Third queue full! Packet dropped." << endl; ++*drop; }
 	}
 	return;
 }
