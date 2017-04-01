@@ -7,6 +7,14 @@ void wait(int seconds){
 	while (clock() < endwait) {}
 }
 
+float stdDeviation(vector<int> qTimes, float mewAv){
+	float std = 0;
+	for(int i = 0; i < qTimes.size(); ++i){
+		std += pow(qTimes[i] - mewAv, 2);
+	}
+	return sqrt(std/qTimes.size());
+}
+
 int maxOrMin(int recent, int past, int type){
 	int value;
 	// Max
@@ -119,4 +127,19 @@ void processThree(int packet, int mew3, SinglyLinkedList* list, int timeElapsed,
 	//wait(mew3-timeElapsed);
 	packet = dequeue(queue, qSize, it);
 	return;
+}
+
+void printDetails(SinglyLinkedList s, float mew1Av, float mew2Av, float mew3Av, int count, int mew1Max, int mew2Max, int mew3Max, int lambda1, int q1p, int q2p, int q3p, float mew1Std, float mew2Std, float mew3Std, int drop, int t, int firstQ[], int Q1, int itQ1, int secondQ[], int Q2, int itQ2, int thirdQ[], int Q3, int itQ3){
+	s.print_all(s.getHead());
+	cout << "Average wait for Q1 | Q2 | Q3:\t" << mew1Av/count << " | " << mew2Av/count << " | " << mew3Av/count << endl;
+	cout << "Max wait for Q1 | Q2 | Q3:\t" << mew1Max << " | " << mew2Max << " | " << mew3Max << endl;
+	cout << "Min wait for Q1 | Q2 | Q3:\t" << q1p+lambda1 << " | " << q2p << " | " << q3p << endl;
+	cout << "Std Deviation for Q1 | Q2 | Q3:\t" << mew1Std << " | " << mew2Std << " | " << mew3Std << endl;
+	cout << "Packets Dropped (Total and average): " << drop << " | " << (float) drop/t << endl;
+	cout << "\nQ1: \t";
+	printQ(firstQ,Q1,itQ1);
+	cout << "Q2: \t";
+	printQ(secondQ,Q2,itQ2);
+	cout << "Q3: \t";
+	printQ(thirdQ,Q3,itQ3);
 }
