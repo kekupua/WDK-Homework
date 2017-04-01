@@ -252,4 +252,4 @@ Iterator<C> find_if(C& c, Pred p)
 	return std::find_if(c.begin(), c.end(), p);
 }
 
-#endif //H112 
+#endif //H112
