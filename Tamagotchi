@@ -1,1 +1,19 @@
-hi
+Algorithms/notes/ideas/blah:
+
+link to instructions: http://members.tripod.com/~Tamagotchi_Central/instructions.html
+
+////overall struct components/////
+life (0 for dead, 1 for baby, etc)
+hunger (0 for full, etc)
+sleep
+health meter (mood, health) (includs sleep, hunger??)
+
+////actions/////
+simple game?
+feed
+light (sleep)
+
+////possible needed files?/////
+print organism - read from file? couts? 
+simple game?
+menu and instructions
