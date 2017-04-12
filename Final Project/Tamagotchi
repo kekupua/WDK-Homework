@@ -1,8 +1,5 @@
-Algorithms/notes:
-
 link to instructions: http://members.tripod.com/~Tamagotchi_Central/instructions.html
-
-(higher/lower mini game)? -
+Algorithms/notes:
 
 Files we need:
   driver.cpp
@@ -10,6 +7,10 @@ Files we need:
   tamagotchi.cpp //(+ .h) class definition etc
   text files with tamagotchi
   status bar?
+  
+NOTES:
+  (higher/lower mini game)? 
+  (>) to go to next day
   
 Week of 4/16: Have protoypes with function definitions
   Mid-way goal: Begin report/driver implementation (if not already started)
