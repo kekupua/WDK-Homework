@@ -20,3 +20,7 @@ light (sleep)
 print organism - read from file? couts? 
 simple game?
 menu and instructions
+
+
+make tamagotchi move until menu option is selected
+if mood/health < 2 -> unhappy face?
