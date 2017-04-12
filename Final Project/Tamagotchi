@@ -2,12 +2,14 @@ Algorithms/notes:
 
 link to instructions: http://members.tripod.com/~Tamagotchi_Central/instructions.html
 
-display.cpp, text files with tamagotchi, status bar, tama class, (higher/lower mini game)
+(higher/lower mini game)? -
 
 Files we need:
   driver.cpp
   display.cpp //(+ .h)
   tamagotchi.cpp //(+ .h) class definition etc
+  text files with tamagotchi
+  status bar?
   
 Week of 4/16: Have protoypes with function definitions
   Mid-way goal: Begin report/driver implementation (if not already started)
