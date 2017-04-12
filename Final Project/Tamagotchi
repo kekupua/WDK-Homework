@@ -2,28 +2,7 @@ Algorithms/notes/ideas/blah:
 
 link to instructions: http://members.tripod.com/~Tamagotchi_Central/instructions.html
 
-////overall struct components/////
-how are we gonna use inheritance?
-life (0 for dead, 1 for baby, etc)
-hunger (0 for full, etc)
-sleep
-health meter (mood, health) (includs sleep, hunger??)
-
-////actions/////
-next day?
-simple game? -tictactoe, hangman, memory game?
-  tictactoe: http://www.cplusplus.com/forum/beginner/52609/
-feed
-light (sleep)
-
-////possible needed files?/////
-print organism - read from file? couts? 
-simple game?
-menu and instructions
-
-
-make tamagotchi move until menu option is selected
-if mood/health < 2 -> unhappy face?
+display.cpp, text files with tamagotchi, status bar, tama class, (higher/lower mini game)
 
 Files we need:
   driver.cpp
