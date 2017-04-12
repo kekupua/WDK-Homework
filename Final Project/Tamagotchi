@@ -24,3 +24,5 @@ menu and instructions
 
 make tamagotchi move until menu option is selected
 if mood/health < 2 -> unhappy face?
+
+display.cpp, text files with tamagotchi, status bar, tama class, (higher/lower mini game)
