@@ -7,7 +7,55 @@ Files we need:
   tamagotchi.cpp //(+ .h) class definition etc
   text files with tamagotchi
   status bar?
-  
+
+Classes needed:
+    tamagotchi:
+        name
+        health
+        mood
+        hunger
+        age
+        money
+        evolve
+
+        functions:
+            evolve
+            game
+            getters/setters
+
+    items:
+        medicine
+            (+ 1 health)
+        food:
+            bread
+                (+ 1 belly)
+            candy
+                (+ 1 mood, - 1 health)
+
+Day: when user enters 'n'
+    - 1-3 randomly belly
+    - 1 mood 
+    +/- 1 randomly health
+
+Game:
+    Winner:
+        + 1 mood
+        + 1 token
+    Loser:
+        - 1 mood
+
+Costs:
+    everything is 1 token
+
+Evolve!
+    Day 1: egg -> MAX HEALTH = 10
+    Day 5: rabbit -> MAX HEALTH = 13
+    Day 15: potato -> MAX HEALTH = 16
+
+Display:
+    STATUS
+    MENU
+
 NOTES:
   (higher/lower mini game)? 
   (>) to go to next day
