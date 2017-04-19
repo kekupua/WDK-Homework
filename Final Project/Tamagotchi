@@ -6,7 +6,7 @@ Files we need:
   display.cpp //(+ .h)
   tamagotchi.cpp //(+ .h) class definition etc
   text files with tamagotchi
-  status bar?
+  status bar
 
 Classes needed:
     tamagotchi:
@@ -58,8 +58,7 @@ Display:
 
 NOTES:
   (higher/lower mini game)? 
-  (>) to go to next day
-  instructions
+  instructions?
   
 Week of 4/16: Have protoypes with function definitions
   Mid-way goal: Begin report/driver implementation (if not already started)
