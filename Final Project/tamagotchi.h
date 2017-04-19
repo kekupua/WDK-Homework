@@ -5,12 +5,26 @@
 #include <iostream>
 using namespace std;
 
-//tamagotchi class
 class tama {
+private:
 string name;
 int age;
 int hunger;
 int health;
 int mood;
-tama() {name = ""; age = 0; hunger = 0; health = 0; mood = 0;};
+int money;
+public:
+tama() {name = "Bob"; age = 0; hunger = 10; health = 10; mood = 10; money = 5;};
+string getname() {return name;}
+int getage() {return age;}
+int gethunger() {return hunger;}
+int gethealth() {return health;}
+int getmood() {return mood;}
+int getmoney() {return money;}
+void setname(string x) {name = x;}
+void setage(int x) {age = x;}
+void sethunger(int x) {hunger = x;}
+void sethealth(int x) {health = x;}
+void setmood(int x) {mood = x;}
+void setmoney(int x) {money =x;}
 };
