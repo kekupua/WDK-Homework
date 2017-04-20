@@ -8,6 +8,7 @@
 using namespace std;
 
 void clrscr();
-int display(string x, string y, class tama tama);
+void displayStatic(int evolution);
+int animate(string x, string y, class tama tama);
 
 #endif

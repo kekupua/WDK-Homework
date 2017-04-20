@@ -1,45 +1,86 @@
-#include "display.h"
-#include "status.h"
-#include "tamagotchi.h"
-#include "item.h"
 #include "time.h"
-#define MAXHEALTH 10
+#include "item.h"
+#include "status.h"
+#include "display.h"
+#include "tamagotchi.h"
+#include <conio.h>
 using namespace std;
 
 int main() {
-	class tama tama;
-	cout << tama.getName() << endl;
-
-	//name the tamagotchi
+	class tama Origin;
+	//	Name the tamagotchi
+	string name;
 	cout << "Enter a name for your tamagotchi: ";
-	string x;
-	cin >> x;
-	tama.setName(x);
+	cin >> name;
+	Origin.setName(name);
+	cout << "Welcome, " << Origin.getName() << "! Please take good care of your Tamagotchi! (CTRL+C to Quit)" << endl;
 
-	/*
-	char c;
-	cin >> c;
-	if(c == 'n')
-		time(tama);
-	*/
-
-	if(tama.getAge() < 5)
-		display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", tama);
-
-	else if(tama.getAge() < 15)
-		display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
-
-	else if(tama.getAge() < 30)
-		display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", tama);
-
-	//evolve
-	if(tama.getAge() == 5) {
-		display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", tama);
-		display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
+	int ran = 0;
+	// Loop
+	while(1){
+		// Check if alive
+		bool life = Origin.checkLife();
+		if(!life){ // If dead
+			cout << "Oh No! Your Tamagotchi has died :( [Program will now exit]" << endl;
+			return 0;
+		}
+		// Check if evolving
+		bool evolve = Origin.checkEvolve();
+		if(evolve){
+			// Show animation
+			// Print prompts
+		}
+		if(ran) system("clear");
+		ifstream test("Resources/Sprites/egg.txt");
+		cout << test.rdbuf();
+		// Present options
+		int input;
+		while(input != 5){
+			cout << "\nMenu\n========\n";
+			cout << "(1) Feed\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Next Day\n";
+			cin >> input;
+			ran = 1;
+			if(input == 1){
+				Origin.feed();
+			}
+			else if(input == 2){ // @TODO
+				Origin.playGame();
+			}
+			else if(input == 3){
+				Origin.shop();
+			}
+			else if(input == 4){
+				Origin.printInventory();
+			}
+			else if(input == 5){// @TODO
+				// Next Day
+			}
+			else{
+				cout << "Invalid Input!, try again." << endl;
+				cin.clear();
+			}
+		}
+		input = 0;
 	}
-	if(tama.getAge() == 15) {
-		display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
-		display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", tama);
+
+	// Not Currently Used
+	if(Origin.getAge() < 5)
+		animate("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", Origin);
+
+	else if(Origin.getAge() < 15)
+		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
+
+	else if(Origin.getAge() < 30)
+		animate("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", Origin);
+
+	// Evolve
+	if(Origin.getAge() == 5) {
+		animate("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", Origin);
+		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
+	}
+	if(Origin.getAge() == 15) {
+		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
+		animate("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", Origin);
 	}
 
 }

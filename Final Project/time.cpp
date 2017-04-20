@@ -2,7 +2,7 @@
 #include "time.h"
 using namespace std;
 
-void time(class tama tama) {
+void nextDay(class tama tama) {
 	//increment age
 	tama.setAge(tama.getAge()+1);
 
