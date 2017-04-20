@@ -32,6 +32,8 @@ int display(string x, string y){
       if(in7) cout << s << endl;
     }
 
+/////////////////////////////////
+
     usleep(400000);
     clrscr(); //clear screen
 

@@ -1,10 +1,12 @@
 #include "display.cpp"
 #include <string.h>
+#include <iostream>
+#include "tamagotchi.h"
 using namespace std;
 
 int main() {
-display("egg.txt", "egg2.txt");
-display("rabbit.txt", "rabbit2.txt");
-display("potato.txt", "potato2.txt");
+//n for next day
+display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt");
+display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt");
+display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt");
 }
-~       
