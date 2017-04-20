@@ -32,4 +32,4 @@ public:
   void setHunger(int h){ hungerValue = h; return;}
   void setMood(int m){ moodValue = m; return;}
   void setHealth(int h){ healthValue = h; return;}
-}
+};
