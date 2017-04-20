@@ -4,6 +4,7 @@
 #include "time.cpp"
 #include <string.h>
 #include <iostream>
+#define MAXHEALTH 10
 using namespace std;
 
 int main() {
@@ -25,22 +26,22 @@ if(c == 'n')
 
 
 if(tama.getAge() < 5) 
-	display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt");
+	display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", tama);
 
 else if(tama.getAge() < 15) 
-	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt");
+	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
 
 else if(tama.getAge() < 30) 
-	display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt");
+	display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", tama);
 
 //evolve
 if(tama.getAge() == 5) {
-	display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt");
-	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt");
+	display("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", tama);
+	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
 }
 if(tama.getAge() == 15) {
-	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt");
-	display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt");
+	display("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", tama);
+	display("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", tama);
 }
 
 }
