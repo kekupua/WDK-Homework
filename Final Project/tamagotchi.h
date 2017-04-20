@@ -1,4 +1,6 @@
 //tamagotchi.h
+#ifndef TAMAGOTCHI_H
+#define TAMAGOTCHI_H
 #include <string>
 #include <iostream>
 using namespace std;
@@ -38,5 +40,8 @@ public:
 
   bool playGame();
   void feed();
+  void shop();
 
 };
+
+#endif

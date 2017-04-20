@@ -1,5 +1,5 @@
-#include <iostream>
-//#include "tamagotchi.h"
+#include "tamagotchi.h"
+#include "time.h"
 using namespace std;
 
 void time(class tama tama) {
@@ -14,5 +14,11 @@ void time(class tama tama) {
 
 	//randomly increment/decrement health
 	tama.setHealth(tama.getHealth() + (rand() % 2) - 1);
+}
 
+// Sleep the program for some time
+void wait(float seconds){
+	clock_t endwait;
+	endwait = clock() + seconds * CLOCKS_PER_SEC;
+	while (clock() < endwait) {}
 }
