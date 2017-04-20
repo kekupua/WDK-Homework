@@ -11,7 +11,7 @@ void tama::shop(){
   displayStatic(evolution);
   int input;
   cout << "What do you want to buy?" << endl;
-  cout << "(1) Medicine [+1 health]\n(2) Bread[+1 health]\n(3) Candy[+1 mood, -1 health]\n";
+  cout << "(1) Medicine [+1 health]\n(2) Bread [+1 health]\n(3) Candy [+1 mood, -1 health]\n";
   cin >> input;
   if(getMoney() == 0){
     cout << "You have no Money!" << endl;
