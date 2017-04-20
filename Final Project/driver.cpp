@@ -3,7 +3,6 @@
 #include "tamagotchi.h"
 #include "item.h"
 #include "time.h"
-#define MAXHEALTH 10
 using namespace std;
 
 int main() {

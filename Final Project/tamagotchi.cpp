@@ -1,6 +1,6 @@
 #include "tamagotchi.h"
 bool tama::playGame(){
-
+return 1;
 }
 
 void tama::shop(){
