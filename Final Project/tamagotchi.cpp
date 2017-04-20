@@ -4,6 +4,7 @@
 bool tama::playGame(){
   cout << "Not implemented yet!\n";
   displayStatic(evolution);
+  return 1;
 }
 
 void tama::shop(){
