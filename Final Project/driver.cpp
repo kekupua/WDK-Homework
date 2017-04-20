@@ -3,12 +3,7 @@
 #include "status.h"
 #include "display.h"
 #include "tamagotchi.h"
-<<<<<<< HEAD
 #include <conio.h>
-=======
-#include "item.h"
-#include "time.h"
->>>>>>> e0f04c6f1c7fc463658c3439201366e2971ae711
 using namespace std;
 
 int main() {
