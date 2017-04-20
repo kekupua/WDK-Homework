@@ -1,6 +1,5 @@
 ///////// display.cpp ///////////
 /////////   team RTS  //////////
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -17,7 +16,7 @@ int display(string x, string y){
   for(int i = 0; i < 5; i++){
     usleep(400000);
     clrscr(); //clear screen
-    
+
     ifstream in5(x);
     ifstream in7("status.txt");
     char s[255];

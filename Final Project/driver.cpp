@@ -1,7 +1,8 @@
-#include "display.cpp"
-#include <string.h>
-#include <iostream>
+#include "display.h"
 #include "tamagotchi.h"
+#include "item.h"
+#include <string>
+#include <iostream>
 using namespace std;
 
 int main() {
