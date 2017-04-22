@@ -3,16 +3,18 @@
 #include "status.h"
 #include "display.h"
 #include "tamagotchi.h"
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
 
 int main() {
 	class tama Origin;
-	//	Name the tamagotchi
+
+	//Name the tamagotchi
 	string name;
 	cout << "Enter a name for your tamagotchi: ";
 	cin >> name;
 	Origin.setName(name);
+
 	cout << "Welcome, " << Origin.getName() << "! Please take good care of your Tamagotchi! (CTRL+C to Quit)" << endl;
 
 	int ran = 0;
@@ -32,7 +34,8 @@ int main() {
 		}
 		if(ran) system("clear");
 		ifstream test("Resources/Sprites/egg.txt");
-		cout << test.rdbuf();
+		////cout << test.rdbuf();
+animate("Resources/Sprites/egg.txt","Resources/Sprites/egg2.txt",Origin);
 		// Present options
 		int input;
 		while(input != 5){

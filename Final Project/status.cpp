@@ -3,7 +3,7 @@
 #include "status.h"
 
 void status(class tama tama) {
-  //print status
+	//print status
 	cout << tama.getName() << endl;
 	cout << "age: " << tama.getAge() << endl;
 	cout << "$$$: " << tama.getMoney() << endl;

@@ -24,7 +24,7 @@ void displayStatic(int evolution){
   return;
 }
 
-int animate(string x, string y, tama tama) {
+void animate(string x, string y, tama tama) {
   //void displayAnimation(string path1, string path2, ...)
   for(int i = 0; i < 5; i++){
     wait(0.4);
@@ -49,5 +49,4 @@ int animate(string x, string y, tama tama) {
     status(tama); // Print screen
   }
 
-return 0;
 }
