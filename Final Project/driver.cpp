@@ -15,6 +15,7 @@ int main() {
 	cin >> name;
 	Origin.setName(name);
 
+//this barely shows up cuz the display/animation clears the screen..so...delete?
 	cout << "Welcome, " << Origin.getName() << "! Please take good care of your Tamagotchi! (CTRL+C to Quit)" << endl;
 
 	int ran = 0;
@@ -34,7 +35,9 @@ int main() {
 		}
 		if(ran) system("clear");
 		ifstream test("Resources/Sprites/egg.txt");
-		////cout << test.rdbuf();
+////test////
+//cout << test.rdbuf();
+Origin.setHealth(6);
 animate("Resources/Sprites/egg.txt","Resources/Sprites/egg2.txt",Origin);
 		// Present options
 		int input;

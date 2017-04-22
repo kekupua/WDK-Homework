@@ -10,31 +10,25 @@ void status(class tama tama) {
 
 	//print health
 	cout << "health: ";
-	for(int i = 0; i <= tama.getHealth(); i++)
+	for(int i = 0; i < tama.getHealth(); i++)
 		cout << "o";
-	if(tama.getHealth() < 10) {
+	for(int i = 0; i < (10-tama.getHealth()); i++)
 		cout << "-";
-		for(int i = 0; i <= (10-tama.getHealth()); i++)
-			cout << "o";
-	}
+	
 
 	//print hunger
 	cout << endl << "belly: ";
-	for(int i = 0; i <= tama.getHunger(); i++)
+	for(int i = 0; i < tama.getHunger(); i++)
 		cout << "o";
-	if(tama.getHunger() < 10) {
+	for(int i = 0; i < (10 - tama.getHunger()); i++)
 		cout << "-";
-		for(int i = 0; i <= (10 - tama.getHunger()); i++)
-			cout << "o";
-	}
+	
 
 	//print mood
 	cout << endl << "mood: ";
-	for(int i = 0; i <= tama.getMood(); i++)
+	for(int i = 0; i < tama.getMood(); i++)
 		cout << "o";
-	if(tama.getMood() < 10) {
+	for(int i = 0; i < (10 - tama.getMood()); i++)
 		cout << "-";
-		for(int i = 0; i <= (10 - tama.getMood()); i++)
-			cout << "o";
-	}
+	
 }
