@@ -4,31 +4,38 @@
 
 void status(class tama tama) {
 	//print status
-	cout << tama.getName() << endl;
-	cout << "age: " << tama.getAge() << endl;
+	cout << tama.getName();
+	switch(tama.getEvolution()){
+		case 1: cout << " [Egg]\n"; break;
+		case 2: cout << " [Rabbit]\n"; break;
+		case 3: cout << " [Potato Man]\n"; break;
+	}
+	cout << "Age: " << tama.getAge() << endl;
 	cout << "$$$: " << tama.getMoney() << endl;
 
 	//print health
-	cout << "health: ";
+	cout << "Health: ";
 	for(int i = 0; i < tama.getHealth(); i++)
-		cout << "o";
-	for(int i = 0; i < (10-tama.getHealth()); i++)
-		cout << "-";
-	
+		cout << "+ ";
+	for(int i = 0; i < (tama.getMaxHealth()-tama.getHealth()); i++)
+		cout << "_ ";
+	cout << "(" << tama.getHealth() << "/" << tama.getMaxHealth() << ")";
 
 	//print hunger
-	cout << endl << "belly: ";
+	cout << "\nBelly: ";
 	for(int i = 0; i < tama.getHunger(); i++)
-		cout << "o";
+		cout << "+ ";
 	for(int i = 0; i < (10 - tama.getHunger()); i++)
-		cout << "-";
-	
+		cout << "_ ";
+	cout << "(" << tama.getHunger() << "/10)";
 
 	//print mood
-	cout << endl << "mood: ";
+	cout << "\nMood: ";
 	for(int i = 0; i < tama.getMood(); i++)
-		cout << "o";
+		cout << "+ ";
 	for(int i = 0; i < (10 - tama.getMood()); i++)
-		cout << "-";
-	
+		cout << "_ ";
+  cout << "(" << tama.getMood() << "/10)";
+
+	return;
 }

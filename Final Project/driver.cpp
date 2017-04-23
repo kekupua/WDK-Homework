@@ -3,54 +3,62 @@
 #include "status.h"
 #include "display.h"
 #include "tamagotchi.h"
-//#include <conio.h>
 using namespace std;
 
 int main() {
+	srand(time(NULL)); // Seed random
 	class tama Origin;
-
+	int ran = 0;
 	//Name the tamagotchi
 	string name;
+	cout << "[Please enlarge your terminal window]\n";
+	cout << "Welcome! Please take good care of your Tamagotchi! (CTRL+C to Quit)\n";
 	cout << "Enter a name for your tamagotchi: ";
 	cin >> name;
+	cin.clear();
+	cin.ignore(255,'\n');
 	Origin.setName(name);
 
-//this barely shows up cuz the display/animation clears the screen..so...delete?
-	cout << "Welcome, " << Origin.getName() << "! Please take good care of your Tamagotchi! (CTRL+C to Quit)" << endl;
-
-	int ran = 0;
 	// Loop
 	while(1){
 		// Check if alive
 		bool life = Origin.checkLife();
 		if(!life){ // If dead
-			cout << "Oh No! Your Tamagotchi has died :( [Program will now exit]" << endl;
+			cout << "Oh No! Your Tamagotchi died :( [Program will now exit]" << endl;
 			return 0;
 		}
 		// Check if evolving
 		bool evolve = Origin.checkEvolve();
 		if(evolve){
 			// Show animation
-			// Print prompts
+			Origin.evolve();
+			animate(Origin);
+			cout << endl << name << " has evolved! [+3 Max Health]\n";
 		}
-		if(ran) system("clear");
-		ifstream test("Resources/Sprites/egg.txt");
-////test////
-//cout << test.rdbuf();
-Origin.setHealth(6);
-animate("Resources/Sprites/egg.txt","Resources/Sprites/egg2.txt",Origin);
+		else{ // Show animation
+			if(ran) system("clear");
+			animate(Origin);
+		}
+
 		// Present options
-		int input;
-		while(input != 5){
-			cout << "\nMenu\n========\n";
-			cout << "(1) Feed\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Next Day\n";
+		char input;
+		while(input != 6){
+			// Clear buffer
+			if(Origin.isSick()) cout << "\nOh no! " << Origin.getName() << " is sick!\nPlease give " << Origin.getName() << " some medicine! [-1 Health per Day]\n";
+			cout << "\n\nMenu\n========\n";
+			cout << "(1) Feed\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Check Status\n(6) Next Day\n";
 			cin >> input;
+			cin.clear();
+			cin.ignore(255,'\n');
+			input = input - '0';
 			ran = 1;
 			if(input == 1){
 				Origin.feed();
 			}
 			else if(input == 2){ // @TODO
-				Origin.playGame();
+				int dollars = Origin.playGame();
+				Origin.setMoney(Origin.getMoney()+dollars);
+				Origin.setMood(Origin.getMood()+1);
 			}
 			else if(input == 3){
 				Origin.shop();
@@ -58,35 +66,18 @@ animate("Resources/Sprites/egg.txt","Resources/Sprites/egg2.txt",Origin);
 			else if(input == 4){
 				Origin.printInventory();
 			}
-			else if(input == 5){// @TODO
-				// Next Day
+			else if(input == 5){
+				displayStatic(Origin.getEvolution());
+				status(Origin);
+			}
+			else if(input == 6){
+				Origin.nextDay();
 			}
 			else{
 				cout << "Invalid Input!, try again." << endl;
-				cin.clear();
 			}
 		}
 		input = 0;
-	}
-
-	// Not Currently Used
-	if(Origin.getAge() < 5)
-		animate("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", Origin);
-
-	else if(Origin.getAge() < 15)
-		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
-
-	else if(Origin.getAge() < 30)
-		animate("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", Origin);
-
-	// Evolve
-	if(Origin.getAge() == 5) {
-		animate("Resources/Sprites/egg.txt", "Resources/Sprites/egg2.txt", Origin);
-		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
-	}
-	if(Origin.getAge() == 15) {
-		animate("Resources/Sprites/rabbit.txt", "Resources/Sprites/rabbit2.txt", Origin);
-		animate("Resources/Sprites/potato.txt", "Resources/Sprites/potato2.txt", Origin);
 	}
 
 }

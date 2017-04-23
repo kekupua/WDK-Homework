@@ -1,0 +1,13 @@
+Let's play a Memory Game!
+
+I will give a secret string
+of characters!
+You will have 3 seconds to
+memorize each string!
+Then, repeat them back to me!
+
+Each successful round will give
++ $1! Ready?
+
+(1) Play!
+(2) Go back

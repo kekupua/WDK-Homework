@@ -9,6 +9,6 @@ using namespace std;
 
 void clrscr();
 void displayStatic(int evolution);
-void animate(string x, string y, class tama tama);
+void animate(class tama tama);
 
 #endif

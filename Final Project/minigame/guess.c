@@ -1,9 +1,7 @@
-
 #include <stdio.h>
 #include "play.h"
 #define TRUE  1
 #define FALSE 0
-//#define DEBUG
 #include <stdlib.h>
 
 #define START    1   /*  macro for the beginning of range of numbers */
@@ -41,5 +39,5 @@ printf("debug:main:the pick is %d\n",hidden_number);
 
 	/*  say goodbye                                         */
 	printf("\nThanks for the game.... bye...\n");
-	
+
 }

@@ -11,6 +11,7 @@ class tama {
 private:
   string name;
   int age, evolution;
+  int sick;
   int hunger;
   int health, maxHealth;
   int mood;
@@ -18,18 +19,20 @@ private:
   int medC, breadC, candyC; // Count of items
 
 public:
-  tama() {name = "Bob"; age = 0; evolution = 1; hunger = 10; health = 10; maxHealth = 10; mood = 10; money = 5; medC = 0; breadC = 0; candyC = 0;}
+  tama() {name = "Bob"; age = 0; evolution = 1; sick = 0; hunger = 10; health = 10; maxHealth = 10; mood = 10; money = 5; medC = 0; breadC = 0; candyC = 0;}
 
   string getName() {return name;}
   int getAge() {return age;}
   int getEvolution() {return evolution;}
   int getHunger() {return hunger;}
   int getHealth() {return health;}
+  int getMaxHealth() {return maxHealth;}
   int getMood() {return mood;}
   int getMoney() {return money;}
   int getMedC() {return medC;}
   int getBreadC() {return breadC;}
   int getCandyC() {return candyC;}
+  int isSick() {return sick;}
 
   void setName(string x) {name = x;}
   void setAge(int x) {age = x;}
@@ -42,11 +45,12 @@ public:
   void setBreadC(int b) {breadC = b;}
   void setCandyC(int c) {candyC = c;}
 
-  bool playGame();
+  int playGame();
   void feed();
   void shop();
   void printInventory();
   void evolve();
+  void nextDay();
   bool checkLife();
   bool checkEvolve();
 };
