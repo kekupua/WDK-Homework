@@ -3,6 +3,7 @@
 #include "./minigame/memory.h"
 #include "./minigame/guess.h"
 #include "tamagotchi.h"
+
 int tama::playGame(){
   int winStatus = 0;
   displayStatic(evolution);
@@ -31,18 +32,18 @@ void tama::shop(){
   }
   else{
     if(input == 1){ // Medicine
-      setMedC(getMedC()+1);
-      setMoney(getMoney()-1);
+      medC++;
+      money -= 1;
       cout << "Bought Medicine! [+1 Medicine, -$1]\n";
     }
     else if(input == 2){ // Bread
-      setBreadC(getBreadC()+1);
-      setMoney(getMoney()-1);
-      cout << "Bought Bread! [+2 Bread, -$1]\n";
+      breadC++;
+      money -= 1;
+      cout << "Bought Bread! [+2 Belly, -$1]\n";
     }
     else if(input == 3){ // Candy
-      setCandyC(getCandyC()+1);
-      setMoney(getMoney()-1);
+      candyC++;
+      money -= 1;
       cout << "Bought Candy! [+1 Candy, -$1]\n";
     }
     else if(input == 4){

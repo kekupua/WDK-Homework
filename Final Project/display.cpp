@@ -48,20 +48,14 @@ void animate(class tama tama) {
     char s[255];
     ifstream in1;
     in1.open(x.c_str());
-    while(in1){
-      in1.getline(s, 255);
-      if(in1) cout << s << endl;
-    }
+    cout << in1.rdbuf();
     status(tama); // Print screen
 
     wait(0.3);
     clrscr(); // Clear screen
     ifstream in2;
     in2.open(y.c_str());
-    while(in2){
-      in2.getline(s, 255);
-      if(in2) cout << s << endl;
-    }
+    cout << in2.rdbuf();
     status(tama); // Print screen
   }
 
