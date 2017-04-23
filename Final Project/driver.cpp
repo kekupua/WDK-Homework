@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
 	srand(time(NULL)); // Seed random
-	class tama Origin;
+	class tama Origin; // Make tamagotchi
 	int ran = 0;
 	//Name the tamagotchi
 	string name;
@@ -24,7 +24,7 @@ int main() {
 		// Check if alive
 		bool life = Origin.checkLife();
 		if(!life){ // If dead
-			cout << "Oh No! Your Tamagotchi died :( [Program will now exit]" << endl;
+			cout << "Oh No! Your Tamagotchi died :(\nYou made it" << Origin.getAge() << " days! [Program will now exit]" << endl;
 			return 0;
 		}
 		// Check if evolving
@@ -40,37 +40,36 @@ int main() {
 			animate(Origin);
 		}
 
-		// Present options
+		// Present menu
 		char input;
 		while(input != 6){
-			// Clear buffer
 			if(Origin.isSick()) cout << "\nOh no! " << Origin.getName() << " is sick!\nPlease give " << Origin.getName() << " some medicine! [-1 Health per Day]\n";
 			cout << "\n\nMenu\n========\n";
-			cout << "(1) Feed\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Check Status\n(6) Next Day\n";
+			cout << "(1) Feed Tamagotchi\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Check Status\n(6) Next Day\n";
 			cin >> input;
 			cin.clear();
 			cin.ignore(255,'\n');
 			input = input - '0';
 			ran = 1;
-			if(input == 1){
+			if(input == 1){ // Feed
 				Origin.feed();
 			}
-			else if(input == 2){ // @TODO
+			else if(input == 2){ // Play game
 				int dollars = Origin.playGame();
 				Origin.setMoney(Origin.getMoney()+dollars);
 				Origin.setMood(Origin.getMood()+1);
 			}
-			else if(input == 3){
+			else if(input == 3){ // Shop for food
 				Origin.shop();
 			}
-			else if(input == 4){
+			else if(input == 4){ // Check Inventory
 				Origin.printInventory();
 			}
-			else if(input == 5){
+			else if(input == 5){ // Check status
 				displayStatic(Origin.getEvolution());
 				status(Origin);
 			}
-			else if(input == 6){
+			else if(input == 6){ // Move forward to next day
 				Origin.nextDay();
 			}
 			else{

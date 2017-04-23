@@ -3,8 +3,10 @@ Let's play the Guessing Game!
 I'm thinking of a number between
 1 and 100.  Can you guess it?
 
-Each successful round will give
-+ $1! Ready?
+You have 6 guesses.
+
+Each successful guess will give
++$1! Ready?
 
 (1) Play!
 (2) Go back

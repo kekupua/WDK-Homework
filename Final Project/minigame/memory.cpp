@@ -4,7 +4,7 @@
 using namespace std;
 int memoryGame(int evolution){
   char choice;
-  ifstream rules("./minigame/game2.txt");
+  ifstream rules("./minigame/instructions1.txt");
   cout << rules.rdbuf();
   cin >> choice;
   cin.clear();

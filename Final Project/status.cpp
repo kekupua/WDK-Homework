@@ -10,7 +10,7 @@ void status(class tama tama) {
 		case 2: cout << " [Rabbit]\n"; break;
 		case 3: cout << " [Potato Man]\n"; break;
 	}
-	cout << "Age: " << tama.getAge() << endl;
+	cout << "Age: " << tama.getAge() << " Days old\n";
 	cout << "$$$: " << tama.getMoney() << endl;
 
 	//print health

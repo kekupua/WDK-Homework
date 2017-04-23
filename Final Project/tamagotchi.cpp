@@ -1,16 +1,18 @@
 #include "time.h"
 #include "display.h"
 #include "./minigame/memory.h"
+#include "./minigame/guess.h"
 #include "tamagotchi.h"
 int tama::playGame(){
   int winStatus = 0;
   displayStatic(evolution);
   char game;
-  cout << "(1) Guessing Game\n(2) Memory Game\n";
+  cout << "(1) Memory Game\n(2) Guessing Game\n(3) Go Back\n";
   cin >> game;
 	game = game - '0';
-  if(game == 1) cout << "Guess\n";//winStatus = guessingGame();
-  else if(game == 2) winStatus = memoryGame(evolution);
+  if(game == 1) winStatus = memoryGame(evolution);
+  else if(game == 2) winStatus = guessingGame();
+  else if(game == 3) return 0;
   else{
     cout << "Invalid Input!\n";
     return 0;
@@ -22,7 +24,7 @@ void tama::shop(){
   displayStatic(evolution);
   int input;
   cout << "What do you want to buy?" << endl;
-  cout << "(1) Medicine [+1 Health, Cures Sickness]\n(2) Bread [+1 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Order\n";
+  cout << "(1) Medicine [+1 Health, Cures Sickness]\n(2) Bread [+2 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Order\n";
   cin >> input;
   if(getMoney() == 0){
     cout << "You have no Money!" << endl;
@@ -36,7 +38,7 @@ void tama::shop(){
     else if(input == 2){ // Bread
       setBreadC(getBreadC()+1);
       setMoney(getMoney()-1);
-      cout << "Bought Bread! [+1 Bread, -$1]\n";
+      cout << "Bought Bread! [+2 Bread, -$1]\n";
     }
     else if(input == 3){ // Candy
       setCandyC(getCandyC()+1);
@@ -57,7 +59,7 @@ void tama::feed(){
   displayStatic(evolution);
   int input;
   cout << "What do you want to feed?" << endl;
-  cout << "(1) Medicine [+1 Health]\n(2) Bread [+1 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Feeding\n";
+  cout << "(1) Medicine [+1 Health]\n(2) Bread [+2 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Feeding\n";
   cin >> input;
   if(input == 1){ // Medicine
     if(medC >= 1){
@@ -65,6 +67,7 @@ void tama::feed(){
       medC -= 1;
       health += 1;
       sick = 0;
+      if(health > maxHealth) health = maxHealth;
     }
     else{
       cout << "You have no Medicine!" << endl;
@@ -72,9 +75,10 @@ void tama::feed(){
   }
   else if(input == 2){ // Bread
     if(breadC >= 1){
-      cout << "Fed Bread! [+1 Belly, -1 Bread]\n";
+      cout << "Fed Bread! [+2 Belly, -1 Bread]\n";
       breadC -= 1;
-      hunger += 1;
+      hunger += 2;
+      if(hunger > 10) hunger = 10;
     }
     else{
       cout << "You have no Bread!" << endl;
@@ -82,10 +86,11 @@ void tama::feed(){
   }
   else if(input == 3){ // Candy
     if(candyC >= 1){
-      cout << "Gave Candy [+1 Mood, -1 Health]!\n";
+      cout << "Gave Candy! [+1 Mood, -1 Health]\n";
       candyC -= 1;
       mood += 1;
       health -= 1;
+      if(mood > 10) mood = 10;
     }
     else{
       cout << "You have no Candy!" << endl;
@@ -120,13 +125,14 @@ void tama::evolve(){
 
 void tama::nextDay(){
   //output = min + (rand() % (int)(max - min + 1))
-  age += 1;
+  age++;
 
   // Sickness Checks
+  if(!mood) health -= 1;
   if(sick) health -= 1;
   else{
     int sickChance = rand()%(int)(100+1);
-    if(sickChance > 75) sick = 1;
+    if(sickChance > 75) sick = 1; // 25% chance to get sick
   }
 
   if(hunger == 0) health -= 1; // If hungry, tamagotchi is dying

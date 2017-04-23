@@ -1,6 +1,5 @@
-˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙Too Low! ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙
-˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙
-˙ ˙ ˙ ˙ ˙ ˙ ˙ Try again!˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙
-˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙
-˙ ˙ ˙ ˙ Number of tries left: ˙ ˙ ˙ ˙ ˙
-˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙ ˙
+              Too Low!
+
+             Try again!
+
+        Number of tries left: 
