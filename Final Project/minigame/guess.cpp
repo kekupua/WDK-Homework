@@ -1,5 +1,6 @@
 #include "guess.h"
 using namespace std;
+
 int guessingGame(){
   int correct = 1, answer, timesCorrect = 0;
   char choice;
@@ -28,4 +29,6 @@ int guessingGame(){
   	cout << "\nYou've earned $"<< timesCorrect << "! Thanks for playing!\n";
     return timesCorrect;
   }
+cout << "Error! Shouldn't be here.\n";
+return -1;
 }

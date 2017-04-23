@@ -24,6 +24,7 @@ int tama::playGame(){
 void tama::shop(){
   displayStatic(evolution);
   int input;
+  cout << "$$$: " << getMoney() << endl;
   cout << "What do you want to buy?" << endl;
   cout << "(1) Medicine [+1 Health, Cures Sickness]\n(2) Bread [+2 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Order\n";
   cin >> input;
