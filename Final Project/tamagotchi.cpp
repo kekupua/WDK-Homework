@@ -38,7 +38,7 @@ void tama::shop(){
     else if(input == 2){ // Bread
       setBreadC(getBreadC()+1);
       setMoney(getMoney()-1);
-      cout << "Bought Bread! [+2 Bread, -$1]\n";
+      cout << "Bought Bread! [+2 Belly, -$1]\n";
     }
     else if(input == 3){ // Candy
       setCandyC(getCandyC()+1);

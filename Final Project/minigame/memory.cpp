@@ -47,8 +47,9 @@ int memoryGame(int evolution){
       else{ // Wrong match
         cout << "Wrong answer :( The answer was ";
         for(int i = 0; i < answer.length(); ++i) cout << answer[i];
-        cout << "\nYou Earned $" << timesCorrect << "!\nLet's play again later!\n";
-        return timesCorrect;
+	int earnings = timesCorrect + (timesCorrect / 3);
+        cout << "\nYou Earned $" << earnings << "!\nLet's play again later!\n";
+        return earnings;
       }
     }
   }
