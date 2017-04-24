@@ -146,7 +146,7 @@ void tama::nextDay(){
 }
 
 bool tama::checkLife(){
-  if(health == 0) return 0;
+  if(health <= 0) return 0;
   else return 1;
 }
 

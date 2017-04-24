@@ -24,7 +24,7 @@ int main() {
 		// Check if alive
 		bool life = Origin.checkLife();
 		if(!life){ // If dead
-			cout << "Oh No! Your Tamagotchi died :(\nYou made it" << Origin.getAge() << " days! [Program will now exit]" << endl;
+			cout << "Oh No! Your Tamagotchi died :(\nYou made it " << Origin.getAge() << " days! [Program will now exit]" << endl;
 			return 0;
 		}
 		// Check if evolving
