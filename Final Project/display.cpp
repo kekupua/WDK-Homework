@@ -22,6 +22,9 @@ void displayStatic(int evolution){
   else if(evolution == 3){ // Potato
     tama.open("Resources/Sprites/potato.txt");
   }
+  else if(evolution == 4){ // tombstone
+    tama.open("Resources/Sprites/rip.txt");
+  }
   cout << tama.rdbuf();
   return;
 }
