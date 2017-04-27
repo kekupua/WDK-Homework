@@ -60,8 +60,8 @@ void tama::shop(){
 void tama::feed(){
   displayStatic(evolution);
   int input;
-  cout << "What do you want to feed?" << endl;
-  cout << "(1) Medicine [+1 Health]\n(2) Bread [+2 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel Feeding\n";
+  cout << "What do you want to give?" << endl;
+  cout << "(1) Medicine [+1 Health]\n(2) Bread [+2 Belly]\n(3) Candy [+1 Mood, -1 Health]\n(4) Cancel\n";
   cin >> input;
   if(input == 1){ // Medicine
     if(medC >= 1){
@@ -106,6 +106,13 @@ void tama::feed(){
   }
 }
 
+void tama::clean(){
+  displayStatic(evolution);
+  poop = 0;
+  cout << getName() << " is now cleaned!" << endl;
+  return;
+}
+
 void tama::printInventory(){
   displayStatic(evolution);
   cout << "Currently in your inventory, you have:" << endl;
@@ -127,7 +134,7 @@ void tama::evolve(){
 
 void tama::nextDay(){
   //output = min + (rand() % (int)(max - min + 1))
-  age++;
+  setAge(getAge()+1);
 
   // Sickness Checks
   if(!mood) health -= 1;
@@ -137,8 +144,13 @@ void tama::nextDay(){
     if(sickChance > 75) sick = 1; // 25% chance to get sick
   }
 
+  // Poop Checks
+  if(poop) health -=1;
+
   if(hunger == 0) health -= 1; // If hungry, tamagotchi is dying
-  hunger -= 1 + (rand()%(int)(3-1+1)); // Subtract a range from 1-3 from current hunger
+  int hungerDec = 1 + (rand()%(int)(3-1+1));
+  hunger -= hungerDec; // Subtract a range from 1-3 from current hunger
+  if(hungerDec > 1) poop = 1;
   if(mood-1 >= 0) mood -= 1; // Tamagotchi gets lonely at night
   health -= rand()%1; // Subtract a range from 0-1 from current health
   if(hunger < 0) hunger = 0;
@@ -151,6 +163,6 @@ bool tama::checkLife(){
 }
 
 bool tama::checkEvolve(){
-  if(age == 5 || age == 15) return 1;
+  if(getAge() == 5 || getAge() == 15) return 1;
   else return 0;
 }

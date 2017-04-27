@@ -24,8 +24,8 @@ int main() {
 		// Check if alive
 		bool life = Origin.checkLife();
 		if(!life){ // If dead
-			//cout << "Oh No! Your Tamagotchi died :(\nYou made it " << Origin.getAge() << " days! [Program will now exit]" << endl;
-			display(4);
+			displayStatic(4);
+			cout << "Oh No! Your Tamagotchi died :(\nYou made it " << Origin.getAge() << " days! [Program will now exit]" << endl;
 			return 0;
 		}
 		// Check if evolving
@@ -43,10 +43,11 @@ int main() {
 
 		// Present menu
 		char input;
-		while(input != 6){
+		while(input != 7){
 			if(Origin.isSick()) cout << "\nOh no! " << Origin.getName() << " is sick!\nPlease give " << Origin.getName() << " some medicine! [-1 Health per Day]\n";
+			if(Origin.pooped()) cout << "\nOh no! " << Origin.getName() << " pooped!\n Please clean up after " << Origin.getName() << ". [-1 Health per Day]\n";
 			cout << "\n\nMenu\n========\n";
-			cout << "(1) Feed Tamagotchi\n(2) Play a Game\n(3) Go to the Shop\n(4) Check Inventory\n(5) Check Status\n(6) Next Day\n";
+			cout << "(1) Feed Tamagotchi\n(2) Play a Game\n(3) Go to the Shop\n(4) Clean up Mess\n(5) Check Inventory\n(6) Check Status\n(7) Next Day\n";
 			cin >> input;
 			cin.clear();
 			cin.ignore(255,'\n');
@@ -63,14 +64,17 @@ int main() {
 			else if(input == 3){ // Shop for food
 				Origin.shop();
 			}
-			else if(input == 4){ // Check Inventory
+			else if(input == 4){ // Clean up mess
+				Origin.clean();
+			}
+			else if(input == 5){ // Check Inventory
 				Origin.printInventory();
 			}
-			else if(input == 5){ // Check status
+			else if(input == 6){ // Check status
 				displayStatic(Origin.getEvolution());
 				status(Origin);
 			}
-			else if(input == 6){ // Move forward to next day
+			else if(input == 7){ // Move forward to next day
 				Origin.nextDay();
 			}
 			else{
