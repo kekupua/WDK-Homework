@@ -45,7 +45,7 @@ int main() {
 		char input;
 		while(input != 7){
 			if(Origin.isSick()) cout << "\nOh no! " << Origin.getName() << " is sick!\nPlease give " << Origin.getName() << " some medicine! [-1 Health per Day]\n";
-			if(Origin.pooped()) cout << "\nOh no! " << Origin.getName() << " pooped!\n Please clean up after " << Origin.getName() << ". [-1 Health per Day]\n";
+			if(Origin.pooped()) cout << "\nOh no! " << Origin.getName() << " pooped!\nPlease clean up after " << Origin.getName() << ". [-1 Health per Day]\n";
 			cout << "\n\nMenu\n========\n";
 			cout << "(1) Feed Tamagotchi\n(2) Play a Game\n(3) Go to the Shop\n(4) Clean up Mess\n(5) Check Inventory\n(6) Check Status\n(7) Next Day\n";
 			cin >> input;
