@@ -150,7 +150,7 @@ void tama::nextDay(){
   if(hunger == 0) health -= 1; // If hungry, tamagotchi is dying
   int hungerDec = 1 + (rand()%(int)(3-1+1));
   hunger -= hungerDec; // Subtract a range from 1-3 from current hunger
-  if(hungerDec > 1) poop = 1;
+  if(hungerDec > 2) poop = 1;
   if(mood-1 >= 0) mood -= 1; // Tamagotchi gets lonely at night
   health -= rand()%1; // Subtract a range from 0-1 from current health
   if(hunger < 0) hunger = 0;
